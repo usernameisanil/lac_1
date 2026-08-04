@@ -1,16 +1,30 @@
 # Generated Prompt — Topic: Direct Methods & Applications
 
-**Unit:** Unit 1 — Matrix Algebra and Linear Systems  
-**Course:** Linear Algebra and Calculus (B.Tech 1st Year)  
-**Target Audience:** B.Tech Engineering Students  
+**Unit:** Unit 1 — Matrix Algebra and Linear Systems
+**Course:** Linear Algebra and Calculus (B.Tech 1st Year)
+**Target Audience:** B.Tech Engineering Students
 
 ---
 
 ## PROMPT INSTRUCTIONS
 
-You are an expert engineering mathematics professor writing a **complete, 100% compilable LaTeX (.tex) lecture note** on the topic **"Direct Methods for Linear Systems — Cramer's Rule, Matrix Inversion Method, and Engineering Applications"**.
+You are an expert engineering mathematics professor writing a **complete, 100% compilable LaTeX (.tex) lecture note** on the topic **"Direct Methods — Cramer's Rule, Matrix Inversion Method, and Applications to Engineering Systems"**.
 
 Write as an enthusiastic, patient teacher who builds deep intuition, connects abstract concepts to real-world engineering applications, and ensures students never feel overwhelmed by mathematical notation.
+
+---
+
+## 0. SUB-TOPIC COVERAGE MANDATE (STRICT ENFORCEMENT)
+
+This prompt covers **3 atomic sub-topics**. Each MUST appear as a separate named `\subsection{}` with its own `infobox`, at least one dedicated worked example, and at least one viva/MCQ question.
+
+| # | Atomic Sub-Topic | Mandatory Coverage Requirements |
+|---|---|---|
+| 1 | **Cramer's Rule** | `infobox`: formal statement — for n×n system Ax=b with det(A)≠0: x_i = det(A_i)/det(A) where A_i is matrix A with i-th COLUMN replaced by b. Proof sketch: multiply Ax=b by adj(A) on left → adj(A)·b = det(A)·x. Conditions: square system, non-singular A. Limitation: O(n·n!) — impractical for n>3. Worked Example: solve a 3×3 system fully — compute det(A) by cofactor expansion, form A1, A2, A3 (show column replacement clearly), compute each det, divide — all steps shown. Verify by back-substitution. |
+| 2 | **Matrix Inversion Method** | `infobox`: x = A^{-1}b; A^{-1} = adj(A)/det(A); full adjugate derivation — cofactor C_{ij}=(−1)^{i+j}M_{ij}, cofactor matrix, adjugate = transpose of cofactor matrix; left-multiply: x = A^{-1}b NOT b·A^{-1} (non-commutativity). Properties: (AB)^{-1}=B^{-1}A^{-1}; (A^T)^{-1}=(A^{-1})^T. Advantage: compute A^{-1} once, solve for multiple b vectors cheaply. Cost: O(n³). Worked Example: solve a 3×3 engineering system (e.g., 3-mesh circuit) using matrix inversion — compute all 9 cofactors individually showing each 2×2 determinant, build adjugate, compute A^{-1}, multiply A^{-1}·b step by step, verify A·x=b. |
+| 3 | **Applications to Engineering Systems** | `infobox`: modelling framework — identify unknowns, write governing equations (KVL, KCL, equilibrium, material balance), form Ax=b, choose method (Cramer's for n≤3, matrix inversion for repeated b, Gauss for large n), interpret solution physically. Decision framework table: problem type vs recommended method. Worked Examples (2 required): (a) 3-mesh electrical circuit — apply Cramer's rule to find mesh currents, compute power P=IV; (b) 3-reactor chemical plant material balance — form 3×3 system, solve via matrix inversion, interpret concentrations physically. |
+
+**ENFORCEMENT RULE:** 3 named `\subsection{}` entries required. Sub-Topic 3 must contain TWO engineering application examples (electrical + chemical/mechanical). Decision framework table comparing all 5 methods mandatory. Assessment must have at least 2 viva questions and 2 MCQs per sub-topic.
 
 ---
 
@@ -45,136 +59,93 @@ Write as an enthusiastic, patient teacher who builds deep intuition, connects ab
 
 ## 2. MANDATORY DOCUMENT SECTIONS & ARCHITECTURE
 
-### Section 1: Real-World Engineering Hook (Curiosity Box)
+### Section 1: Real-World Engineering Hook
 - `curiositybox` titled **"Why Should an Engineer Care?"**
-- Scenario: In robotics and control systems, the inverse kinematics problem — finding joint angles from an end-effector position — reduces to solving Ax = b where A is the Jacobian matrix of the robot arm. Using the matrix inversion method (x = A^{-1}b), a robot controller can compute target joint angles in real time. In electrical engineering, Cramer's rule elegantly gives mesh currents in a 2- or 3-mesh circuit without full row reduction — ideal for closed-form symbolic analysis. In chemical process engineering, matrix methods solve simultaneous material balance equations across multiple reactors.
+- Scenario: Robot arm inverse kinematics → Jacobian^{-1} · velocity = joint rates (matrix inversion in real time). Electrical mesh analysis → Cramer's rule for symbolic closed-form current expressions. Chemical process material balances → matrix inversion for steady-state concentrations. These are the tools engineers reach for first before scaling to larger numerical solvers.
 
-### Section 2: Why This Topic Exists (Theory vs Real-World Impact)
-- `booktabs` table:
-  - Cramer's Rule → Exact closed-form solution → Best for n ≤ 3, symbolic work, theoretical proofs
-  - Matrix Inversion → x = A^{-1}b → Ideal when same A is used for multiple RHS vectors b
-  - Gauss Elimination → Row reduction → Best for general large systems, no closed form needed
-  - Cramer's Rule for n > 4 → O(n! · n) operations → Computationally infeasible for large n
-  - Matrix Inversion → O(n³) → Moderate cost, powerful for repeated solves
-- `learnbox`: "Choose your method based on problem size, structure, and whether A changes — engineers must be pragmatic, not dogmatic."
+### Section 2: Theory vs Real-World Impact
+- `booktabs` table covering all 3 sub-topics + 2 supporting methods (Gauss, GS) for comparison.
+- `learnbox`: "Choose your method based on system size, structure, and whether A is reused — be pragmatic."
 
-### Section 3: Intuition First & Mathematical Definitions
-- Intuition: If Ax = b and A is invertible, then x = A^{-1}b — just like dividing both sides in scalar algebra, but we must multiply by A^{-1} on the LEFT.
-- `infobox` definitions:
-  - Cramer's Rule: For Ax = b (n×n, det(A) ≠ 0): x_i = det(A_i) / det(A) where A_i is A with the i-th column replaced by b.
-  - Matrix Inversion Method: x = A^{-1}b; A^{-1} = adj(A)/det(A)
-  - Adjugate matrix: adj(A)_{ij} = C_{ji} (transpose of cofactor matrix)
-  - Condition: det(A) ≠ 0 for unique solution (both methods)
-  - Computational comparison: Cramer's Rule = n+1 determinants; Matrix inversion = cofactor matrix + one matrix multiplication
+### Section 3: Definitions (3 Subsections)
+- `\subsection{Cramer's Rule}`
+- `\subsection{Matrix Inversion Method}`
+- `\subsection{Applications to Engineering Systems}`
+Each: conversational intuition → `infobox` with full formal content from Section 0.
 
-### Section 4: Visual Artifacts & Geometric Interpretation (MANDATORY LaTeX Visuals)
-- **Visual 1 (TikZ):** Cramer's Rule diagram for a 3×3 system: show matrix A, then A1, A2, A3 side by side with the replaced column highlighted in a different color. Label which column is replaced for each.
-- **Visual 2 (TikZ):** Matrix inversion pipeline: A → cofactor matrix C → transpose → adj(A) → divide by det(A) → A^{-1} → multiply by b → x. Draw as a flowchart with matrix boxes and arrows.
-- **Visual 3 (pgfplots or TikZ):** Method comparison chart — horizontal bar chart comparing computational complexity (operations count) for Cramer's, Matrix Inversion, and Gauss Elimination for n = 2, 3, 4. Use `pgfplots` `ybar` chart.
+### Section 4: Visual Artifacts (MANDATORY)
+- **Visual 1 (TikZ):** Cramer's rule column-replacement diagram — show 3×3 matrix A; then A1 (col 1 replaced, highlighted), A2 (col 2 replaced), A3 (col 3 replaced) — label which column is b in each.
+- **Visual 2 (TikZ):** Matrix inversion pipeline flowchart — A → cofactor matrix C → transpose → adj(A) → ÷det(A) → A^{-1} → ×b → x. Boxes with arrows.
+- **Visual 3 (pgfplots):** Horizontal grouped bar chart — computational operations for Cramer's, Matrix Inversion, Gauss Elimination, Gauss-Jordan for n=2,3,4 — `ybar` style with legend.
+- **Visual 4 (TikZ):** 3-mesh circuit diagram — three loops with resistors and voltage sources labeled; mesh current arrows I1, I2, I3 shown.
 
-### Section 5: Step-by-Step Algorithmic Solution / Workflow
+### Section 5: Step-by-Step Algorithmic Workflows
+1. **Cramer's Rule Algorithm** — check det(A)≠0 → compute det(A) → for each i: replace col i with b → compute det(A_i) → x_i = det(A_i)/det(A).
+2. **Matrix Inversion Algorithm** — check det(A)≠0 → compute all n² cofactors → build cofactor matrix → transpose → divide by det → x = A^{-1}b → verify.
+3. **Engineering Modelling Algorithm** — identify unknowns → write governing equations → form Ax=b → select method using decision table → solve → interpret physically.
 
-**Cramer's Rule Algorithm:**
-1. Check det(A) ≠ 0; if det(A) = 0, method fails — use other approach.
-2. Compute det(A) by cofactor expansion.
-3. For each i = 1 to n:
-   a. Form matrix A_i: replace column i of A with vector b.
-   b. Compute det(A_i).
-   c. x_i = det(A_i) / det(A).
-4. Write solution vector x = [x1, x2, ..., xn]^T.
+### Section 6: Fully Worked Examples (5 — covering all sub-topics with required depth)
 
-**Matrix Inversion Method Algorithm:**
-1. Check det(A) ≠ 0.
-2. Compute cofactor C_{ij} = (−1)^{i+j} M_{ij} for all i, j.
-3. Form cofactor matrix C.
-4. Adjugate: adj(A) = C^T.
-5. A^{-1} = adj(A) / det(A).
-6. Solution: x = A^{-1} · b (matrix-vector multiplication).
-7. Verify: A · x = b.
+**Example 1 — Cramer's Rule (2×2, Basic):**
+Solve 3x+2y=7, x−y=1. Show det(A), form A1 and A2 with column replacement shown explicitly, compute each determinant, compute x and y, verify.
+`learnbox`: "For 2×2 systems, Cramer's rule is the fastest hand-calculation method."
 
-### Section 6: Fully Worked Step-by-Step Numerical Examples
+**Example 2 — Cramer's Rule (3×3, Full):**
+Solve a 3×3 system — compute det(A) by cofactor expansion, form A1,A2,A3 showing each column replacement, compute all 3 determinants, divide, verify. Every arithmetic step shown.
+`learnbox`: "For 3×3 systems, Cramer's rule requires 4 full determinant evaluations — check det(A)≠0 first."
 
-**Example 1 (Basic — Cramer's Rule, 2×2):**
-Solve: 3x + 2y = 7, x − y = 1 using Cramer's rule.
-- Compute det(A) = 3(−1) − 2(1) = −5.
-- Form A1 (replace col 1 with b): det(A1) = 7(−1)−2(1) = −9 → x = −9/−5 = 9/5.
-- Form A2 (replace col 2 with b): det(A2) = 3(1)−7(1) = −4 → y = −4/−5 = 4/5.
-- Verify: 3(9/5) + 2(4/5) = 27/5 + 8/5 = 35/5 = 7 ✓.
-`learnbox`: "Cramer's rule is elegant for 2×2 and 3×3 — beyond that, use Gauss elimination."
+**Example 3 — Matrix Inversion (3×3):**
+Solve 2x+y+z=5, 4x−6y=−2, −2x+7y+2z=9 via matrix inversion. Compute all 9 cofactors individually (each as 2×2 determinant shown fully), build cofactor matrix, transpose to adj(A), divide by det(A), multiply A^{-1}·b, verify A·x=b.
+`learnbox`: "Computing A^{-1} costs more upfront but pays off when solving for multiple b vectors."
 
-**Example 2 (Intermediate — Matrix Inversion, 3×3):**
-Solve: 2x + y + z = 5, 4x − 6y = −2, −2x + 7y + 2z = 9 using the matrix inversion method.
-- Write A and b. Compute det(A) by cofactor expansion — show all steps.
-- Compute all 9 cofactors C_{11} to C_{33} — show each 2×2 determinant.
-- Form cofactor matrix, then adj(A) = C^T.
-- Compute A^{-1} = adj(A)/det(A). Show full fraction arithmetic.
-- Compute x = A^{-1} · b — show matrix-vector multiplication step by step.
-- Verify A · x = b.
-`learnbox`: "The matrix inversion method is powerful when you need to solve Ax = b for many different b vectors with the same A."
+**Example 4 — Engineering Application (3-Mesh Circuit, Cramer's Rule):**
+KVL on 3 meshes: 5I1−2I2=10, −2I1+6I2−I3=0, −I2+4I3=8. Solve for I1,I2,I3 using Cramer's rule. Compute power at source P=I·V. Interpret current directions.
+`learnbox`: "Cramer's rule gives mesh currents as exact fractions — ideal for symbolic circuit analysis."
 
-**Example 3 (Applied Engineering — 3-Mesh Circuit Analysis):**
-Three coupled mesh equations from Kirchhoff's Voltage Law give: 5I1 − 2I2 = 10, −2I1 + 6I2 − I3 = 0, −I2 + 4I3 = 8 (all in Ω and V). Solve for mesh currents I1, I2, I3 using Cramer's rule. Interpret each current physically (direction, magnitude relative to source voltage). Compute power delivered: P = I · V_source.
-`learnbox`: "Cramer's rule gives mesh currents as clean fractions — ideal for symbolic analysis of circuits."
+**Example 5 — Engineering Application (Material Balance, Matrix Inversion):**
+Three reactors in series: 3C1−C2=10, −C1+4C2−C3=5, −C2+3C3=8 (concentrations in mol/L). Solve using matrix inversion. Interpret each concentration physically and verify units.
+`learnbox`: "Matrix inversion elegantly handles any number of coupled balance equations — the foundation of process simulation."
 
-### Section 7: Tabular Comparison / Workflow Reference
+### Section 7: Decision Framework Table (MANDATORY)
+Full `booktabs` table: Method | Formula | Prerequisite | Time Complexity | Memory | Best Use Case — 5 methods: Cramer's, Matrix Inversion, Gauss Elimination, Gauss-Jordan, Gauss-Seidel.
 
-| Method | Formula | Pre-condition | Ops Complexity | When to Use |
-|---|---|---|---|---|
-| Cramer's Rule | x_i = det(A_i)/det(A) | det(A) ≠ 0 | O(n · n!) | n ≤ 3, symbolic |
-| Matrix Inversion | x = A^{-1}b | det(A) ≠ 0 | O(n³) | Multiple b vectors |
-| Gauss Elimination | Row reduce [A|b] | — | O(n³/3) | General, large n |
-| Gauss-Jordan | RREF [A|b] | — | O(n³/2) | Small, hand calc |
-| Iterative (GS/Jacobi) | x^{(k+1)} from x^{(k)} | Diag. dominant | O(k·n²) | Large sparse A |
+### Section 8: Common Student Mistakes
+`mistakebox` — one per sub-topic plus extras:
+- Wrong column replaced in Cramer's (row instead of column)
+- x = b·A^{-1} instead of x = A^{-1}·b (non-commutativity)
+- Not transposing cofactor matrix to get adj(A)
+- Using Cramer's for n>3 (computationally infeasible)
+- Not verifying A·x=b after computation
 
-### Section 8: Common Student Mistakes & Pitfalls
+### Section 9: Assessment Suite
+**Viva-Voce (min 9 — 3 per sub-topic):**
+1–3: Cramer's — state rule, column replacement rule, when it fails.
+4–6: Matrix inversion — adjugate definition, left multiply rule, advantage for multiple b.
+7–9: Applications — modelling steps, decision framework, how to verify solution physically.
 
-`mistakebox`:
+**Descriptive Problems (5 — matching 5 worked examples). MCQs (min 6 — 2 per sub-topic).**
 
-| Mistake | Why Students Do It | Correct Approach |
-|---|---|---|
-| Replacing wrong column in Cramer's | Confusion about A_i index | For x_i, replace COLUMN i (not row i) with b |
-| x = b · A^{-1} instead of x = A^{-1} · b | Scalar intuition | Matrix multiplication is NOT commutative — A^{-1} goes on the LEFT |
-| Forgetting to transpose cofactor matrix | Missing the adjugate step | adj(A) = (cofactor matrix)^T — transpose first, then divide by det |
-| Using Cramer's for 4×4 system | Not considering cost | Cramer's for n > 3 is computationally expensive — use Gauss |
-| Not verifying solution after computation | Overconfidence | Always multiply A · x and check if it equals b |
-
-### Section 9: Comprehensive Assessment Suite
-
-**Viva-Voce (7 Questions):**
-1. State Cramer's rule for a 3×3 system.
-2. What is the adjugate of a matrix? How is it related to the inverse?
-3. When does Cramer's rule fail? What should you do then?
-4. Why is x = b · A^{-1} wrong?
-5. For which scenario is the matrix inversion method more efficient than Gauss elimination?
-6. What is the computational cost of Cramer's rule for a 5×5 system?
-7. How do you verify that your computed A^{-1} is correct?
-
-**Descriptive Problems (4):**
-1. Solve a 3×3 system using Cramer's rule — show all cofactor determinants.
-2. Find A^{-1} using the adjugate method and solve Ax = b.
-3. Compare all three methods for a 3×3 circuit system — comment on efficiency.
-4. An engineering system has 3 material balances — model as Ax = b and solve using matrix inversion.
-
-**MCQs (5):** Cramer's formula, adjugate definition, computational cost, condition for existence, method selection.
-
-### Section 10: Quick Recap & Formula Sheet
-
-`learnbox` (8 bullets):
-- Cramer's Rule: x_i = det(A_i)/det(A); replace i-th column of A with b to form A_i
-- Matrix Inversion: x = A^{-1}b = [adj(A)/det(A)]·b
-- adj(A) = transpose of cofactor matrix (NOT cofactor matrix itself)
-- A^{-1} exists iff det(A) ≠ 0 (non-singular matrix)
-- Always left-multiply: x = A^{-1}·b, NOT b·A^{-1}
-- Cramer's is O(n·n!) — impractical for n > 3 numerically
-- Matrix inversion is O(n³) — efficient for multiple RHS vectors
-- Always verify: compute A·x and confirm it equals b
+### Section 10: Quick Recap
+`learnbox` (9 bullets):
+- Cramer's: x_i = det(A_i)/det(A); replace COLUMN i (not row) with b
+- Cramer's requires det(A)≠0; O(n·n!) — use only for n≤3
+- Matrix inversion: x = A^{-1}b; A^{-1} = adj(A)/det(A)
+- adj(A) = TRANSPOSE of cofactor matrix
+- ALWAYS left-multiply: x = A^{-1}·b, NOT b·A^{-1}
+- (AB)^{-1} = B^{-1}A^{-1}; (A^T)^{-1} = (A^{-1})^T
+- Matrix inversion O(n³) — efficient for repeated solves with same A
+- Engineering modelling: unknowns → equations → Ax=b → method selection → interpret
+- Always verify: compute A·x and confirm = b
 
 ---
 
 ## 3. STRICT QUALITY & COMPILATION SAFEGUARDS
-- [ ] Cramer's rule determinant computations show FULL cofactor expansion — no shortcuts.
-- [ ] Matrix inversion: all 9 cofactors computed individually with 2×2 determinant shown.
-- [ ] TikZ flowchart for inversion pipeline must be properly spaced and labeled.
-- [ ] pgfplots bar chart uses valid coordinates and axis labels.
-- [ ] Verify step (A·x = b) included in all three worked examples.
+- [ ] Exactly 3 `\subsection{}` entries in Section 3.
+- [ ] Sub-Topic 3 contains exactly 2 engineering application examples (electrical + chemical).
+- [ ] Decision framework table covers all 5 methods.
+- [ ] All 9 cofactors in Example 3 computed individually — no skipping.
+- [ ] Column replacement (not row) explicitly labeled in all Cramer's examples.
+- [ ] Verification (A·x = b) shown in all 5 worked examples.
+- [ ] TikZ circuit diagram includes mesh current arrows and component labels.
+- [ ] pgfplots bar chart has valid axis, legend, and numeric coordinates.
 - [ ] All tcolorboxes closed; `\begin{document}...\end{document}` wraps everything.

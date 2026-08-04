@@ -1,16 +1,30 @@
 # Generated Prompt — Topic: System of Linear Equations
 
-**Unit:** Unit 1 — Matrix Algebra and Linear Systems  
-**Course:** Linear Algebra and Calculus (B.Tech 1st Year)  
-**Target Audience:** B.Tech Engineering Students  
+**Unit:** Unit 1 — Matrix Algebra and Linear Systems
+**Course:** Linear Algebra and Calculus (B.Tech 1st Year)
+**Target Audience:** B.Tech Engineering Students
 
 ---
 
 ## PROMPT INSTRUCTIONS
 
-You are an expert engineering mathematics professor writing a **complete, 100% compilable LaTeX (.tex) lecture note** on the topic **"System of Linear Equations — Consistency, Gauss Elimination, and Gauss-Jordan Method"**.
+You are an expert engineering mathematics professor writing a **complete, 100% compilable LaTeX (.tex) lecture note** on the topic **"System of Linear Equations — Consistency, Gauss Elimination and Gauss-Jordan Method"**.
 
 Write as an enthusiastic, patient teacher who builds deep intuition, connects abstract concepts to real-world engineering applications, and ensures students never feel overwhelmed by mathematical notation.
+
+---
+
+## 0. SUB-TOPIC COVERAGE MANDATE (STRICT ENFORCEMENT)
+
+This prompt covers **3 atomic sub-topics**. Each MUST appear as a separate named `\subsection{}` with its own `infobox`, at least one dedicated worked example, and at least one viva/MCQ question.
+
+| # | Atomic Sub-Topic | Mandatory Coverage Requirements |
+|---|---|---|
+| 1 | **Consistency Conditions** | `infobox`: matrix form Ax=b; augmented matrix [A\|b]; Rouché–Capelli theorem (state formally): rank[A]=rank[A\|b] → consistent; rank[A]=rank[A\|b]=n → unique solution; rank[A]=rank[A\|b]=r<n → infinite solutions with (n−r) free variables; rank[A]≠rank[A\|b] → inconsistent. Include geometric interpretation: 2 equations = 2 lines → unique (intersect), infinite (same line), none (parallel). Worked Example: for each of 3 systems (unique, infinite, inconsistent), form augmented matrix, compute both ranks, apply theorem, state nature of solution — all three cases in one example. |
+| 2 | **Gauss Elimination Method** | `infobox`: forward elimination to upper triangular form + back substitution; multiplier formula m_{ik}=a_{ik}/a_{kk}; row operation Ri→Ri−m_{ik}Rk; partial pivoting note (swap rows if pivot is zero). Full step-by-step algorithm boxed. Worked Example: solve a 3×3 system with unique solution — write augmented matrix, perform ALL elimination steps with labeled operations, back-substitute from last equation upward, write final solution, VERIFY by substituting into all 3 original equations. |
+| 3 | **Gauss-Jordan Method** | `infobox`: extend Gauss elimination upward — eliminate both ABOVE and BELOW each pivot to reach RREF; solution read directly from last column with no back-substitution needed. Difference from Gauss: Gauss stops at upper triangular; Gauss-Jordan continues to RREF. Worked Example: solve a 3×3 system using Gauss-Jordan — show all upward elimination steps labeled, display final RREF, read off solution directly. Then solve a 3×4 system with infinite solutions — express general solution in parametric vector form. |
+
+**ENFORCEMENT RULE:** 3 named `\subsection{}` entries required. Geometric visualization (3 cases) mandatory for Sub-Topic 1. Assessment must contain at least 2 viva questions and 2 MCQs per sub-topic.
 
 ---
 
@@ -47,135 +61,89 @@ Write as an enthusiastic, patient teacher who builds deep intuition, connects ab
 
 ### Section 1: Real-World Engineering Hook (Curiosity Box)
 - `curiositybox` titled **"Why Should an Engineer Care?"**
-- Scenario: Every engineering simulation — from finite element analysis (FEA) in ANSYS to traffic flow optimization to power grid load balancing — reduces to solving a system of linear equations Ax = b. When a structural engineer computes deflections in a truss with 100 members, they solve a 100×100 linear system. Gauss elimination is the backbone of nearly all numerical solvers. Understanding consistency means understanding when a design has a valid solution at all.
+- Scenario: Every engineering simulation (FEA in ANSYS, traffic optimization, power grid load balancing) reduces to Ax=b. A 100-member truss → 100×100 linear system. Gauss elimination is the backbone of all numerical solvers. Consistency check tells you whether a valid design solution exists at all before any computation.
 
-### Section 2: Why This Topic Exists (Theory vs Real-World Impact)
-- `booktabs` table:
-  - Consistent system (unique solution) → Well-posed engineering problem → Unique design parameters
-  - Consistent system (infinite solutions) → Underdetermined system → Redundant constraints / structural redundancy
-  - Inconsistent system → No solution → Contradictory specifications → Design error
-  - Gauss Elimination → Forward reduction → Standard solver backbone
-  - Gauss-Jordan → Full RREF → Direct read-off of solution
-- `learnbox`: "Knowing whether a solution exists — and how many — is the first question every engineer must answer before computation."
+### Section 2: Why This Topic Exists — Theory vs Real-World Impact
+- `booktabs` table: 5 rows covering consistent (unique), consistent (infinite), inconsistent, Gauss elimination, Gauss-Jordan.
+- `learnbox`: "Knowing whether a solution exists — and how many — is the first question every engineer must answer."
 
-### Section 3: Intuition First & Mathematical Definitions
-- Intuition: 2 equations, 2 unknowns = 2 lines. Unique solution = lines intersect. No solution = parallel lines. Infinite = same line.
-- `infobox` definitions:
-  - Matrix form Ax = b; Augmented matrix [A|b]
-  - Rouché–Capelli (Kronecker–Capelli) Theorem: System is consistent iff rank[A] = rank[A|b]
-    - rank[A] = rank[A|b] = n → Unique solution
-    - rank[A] = rank[A|b] < n → Infinite solutions (n − r free variables)
-    - rank[A] ≠ rank[A|b] → Inconsistent (no solution)
-  - Elementary row operations: Type I (swap), Type II (scale), Type III (add multiple)
-  - Gauss Elimination: Forward elimination to upper triangular form → back substitution
-  - Gauss-Jordan: Full reduction to RREF → solution directly from last column
+### Section 3: Intuition First & Definitions (3 Subsections)
+- `\subsection{Consistency Conditions and the Rouché–Capelli Theorem}`
+- `\subsection{Gauss Elimination Method}`
+- `\subsection{Gauss-Jordan Method}`
+Each: conversational intuition → dedicated `infobox` with formal theorem/algorithm from Section 0.
 
-### Section 4: Visual Artifacts & Geometric Interpretation (MANDATORY LaTeX Visuals)
-- **Visual 1 (pgfplots):** Plot three cases of 2D systems:
-  - Case 1: Two intersecting lines (unique solution — mark intersection point)
-  - Case 2: Two parallel lines (no solution)
-  - Case 3: One line (infinite solutions — same line plotted twice with offset label)
-  Use three side-by-side `tikzpicture` with axis environments.
-- **Visual 2 (TikZ):** Step-by-step augmented matrix transformation: show original [A|b] → after R2−2R1 → after R3−R1 → upper triangular → back-substitution arrow. Color-code pivot elements.
-- **Visual 3 (TikZ):** Decision flowchart: Given Ax=b → Compute rank[A] and rank[A|b] → Compare → Branch to Unique / Infinite / Inconsistent.
+### Section 4: Visual Artifacts (MANDATORY)
+- **Visual 1 (pgfplots):** Three side-by-side 2D plots — Case 1: intersecting lines (unique solution, mark point); Case 2: parallel lines (no solution, label "Inconsistent"); Case 3: identical lines (infinite solutions, label "Infinite").
+- **Visual 2 (TikZ):** Augmented matrix transformation stages — [A|b] original → after forward elimination → upper triangular → after back-sub → solution vector. Color-code pivot entries.
+- **Visual 3 (TikZ):** Decision flowchart — Ax=b → compute rank[A] and rank[A|b] → compare → branch to three outcome boxes.
+- **Visual 4 (TikZ):** Gauss vs Gauss-Jordan comparison — show same matrix being reduced: Gauss stops at upper triangular, Gauss-Jordan continues to RREF.
 
-### Section 5: Step-by-Step Algorithmic Solution / Workflow
+### Section 5: Step-by-Step Algorithmic Workflows
+1. **Consistency Check Algorithm** — compute rank[A], rank[A|b], apply Rouché–Capelli, determine nature.
+2. **Gauss Elimination Algorithm** — forward sweep with partial pivoting note, back-substitution from last row upward.
+3. **Gauss-Jordan Algorithm** — forward AND backward sweep, RREF, direct solution read-off.
+4. **General Solution for Infinite Cases** — identify free variables, parametrize, write vector form.
 
-**Gauss Elimination Algorithm:**
-1. Form augmented matrix [A|b].
-2. For each pivot column k = 1 to n: Make a_{kk} ≠ 0 (swap rows if needed).
-3. For each row i > k: Compute multiplier m_{ik} = a_{ik}/a_{kk}. Apply R_i → R_i − m_{ik}·R_k.
-4. Obtain upper triangular system.
-5. Back-substitute: x_n = b_n/a_{nn}; x_{n-1} = (b_{n-1} − a_{n-1,n}·x_n)/a_{n-1,n-1}; ...
+### Section 6: Fully Worked Examples (4 — covering all sub-topics with extra depth)
 
-**Gauss-Jordan Extension:**
-Continue eliminating upward from each pivot (eliminate both below AND above) until RREF is obtained. Read solution directly: x_i = last column value in row i.
+**Example 1 — All Three Consistency Cases:**
+Present three 3×3 systems. For each: form augmented matrix, row-reduce, compute rank[A] and rank[A|b], state nature of solution by Rouché–Capelli theorem.
+`learnbox`: "Always check consistency before solving — saves time and avoids meaningless computation."
 
-**Consistency Check (Insert before solving):**
-- Compute rank[A] by counting non-zero rows.
-- Compute rank[A|b] by counting non-zero rows.
-- Apply Rouché–Capelli theorem to determine nature of solution.
+**Example 2 — Gauss Elimination (Unique Solution):**
+Solve x+y+z=6, 2x−y+3z=14, 3x+2y−z=2. Write [A|b], perform R2→R2−2R1, R3→R3−3R1, then R3→R3−(8/3)R2. Back-substitute upward — show every arithmetic step. Verify all 3 original equations.
+`learnbox`: "Back-substitution starts from the LAST equation and works upward."
 
-### Section 6: Fully Worked Step-by-Step Numerical Examples
+**Example 3 — Gauss-Jordan (Unique Solution):**
+Solve the same system using Gauss-Jordan. After upper triangular form, continue upward elimination. Display RREF. Read solution directly.
+`learnbox`: "Gauss-Jordan gives solution directly from the last column — no back-substitution needed."
 
-**Example 1 (Basic — Unique Solution, 3×3):**
-Solve: x+y+z=6, 2x−y+3z=14, 3x+2y−z=2 using Gauss elimination.
-- Write augmented matrix.
-- Perform R2→R2−2R1, R3→R3−3R1.
-- Perform R3→R3 − (8/3)R2.
-- Back-substitute to find x, y, z.
-- Verify by substituting back into original equations.
-`learnbox`: "Always verify your solution by back-substitution into every original equation."
+**Example 4 — Gauss-Jordan (Infinite Solutions + Engineering Application):**
+Solve a 3×4 underdetermined system. Identify r free variables. Write general solution in parametric vector form: x = x_particular + t·x_homogeneous. Apply to a power network nodal analysis problem.
+`learnbox`: "Infinite solutions mean free variables exist — always express the complete general solution in vector form."
 
-**Example 2 (Intermediate — Infinite Solutions):**
-Solve: x+2y−z=3, 2x+4y−2z=6, 3x+6y−3z=9.
-- Reduce augmented matrix — all rows reduce to zero after R1.
-- Identify rank[A] = rank[A|b] = 1 < n = 3.
-- Express solution with 2 free variables: let y=s, z=t → x = 3−2s+t.
-- Write general solution in vector form: x = [3,0,0]^T + s[−2,1,0]^T + t[1,0,1]^T.
-`learnbox`: "Infinite solutions arise when free variables exist — express solution in parametric vector form."
-
-**Example 3 (Applied — Power Grid Nodal Analysis):**
-Three nodes in a simplified power network yield: 3V1 − V2 = 10, −V1 + 4V2 − V3 = 5, −V2 + 3V3 = 8. Solve using Gauss-Jordan (full RREF). Interpret each voltage V1, V2, V3 as node voltages in the network.
-`learnbox`: "Gauss-Jordan directly gives the final answer without back-substitution — preferred for hand calculation when precision matters."
-
-### Section 7: Tabular Comparison / Workflow Reference
-
-| Method | Reduction Target | Back-Sub Needed | Best For | Computational Cost |
-|---|---|---|---|---|
-| Gauss Elimination | Upper triangular | Yes | Large systems, programming | O(n³/3) |
-| Gauss-Jordan | RREF | No | Small systems, hand calc | O(n³/2) |
-| Cramer's Rule | — | — | n ≤ 3, theoretical use | O(n! · n) — expensive |
-| Matrix Inversion | A^{-1}b | No | Multiple RHS vectors | O(n³) |
+### Section 7: Tabular Reference
+`booktabs` table: Method | Reduction Target | Back-Sub Needed | Cost | Best For.
+Second table: Rouché–Capelli theorem — all 3 cases with rank conditions, solution type, geometric meaning, engineering example.
 
 ### Section 8: Common Student Mistakes & Pitfalls
-
-`mistakebox`:
-
-| Mistake | Why Students Do It | Correct Approach |
-|---|---|---|
-| Not checking consistency before solving | Rushing to solve | Always check rank[A] = rank[A|b] first |
-| Arithmetic error in row operations | Mental calculation | Write multiplier m_{ik} = a_{ik}/a_{kk} explicitly before applying |
-| Declaring inconsistent when rank[A|b] has zero row | Misreading RREF | A zero row in [A|b] is fine; inconsistency only if 0 = nonzero |
-| Back-substituting in wrong order | Starting from x1 | Always back-substitute from LAST equation upward |
-| Treating Gauss-Jordan as different from elimination | Confusion | Gauss-Jordan is just Gauss elimination extended upward too |
+`mistakebox` — one per sub-topic plus extras:
+- Not checking consistency before solving
+- Misidentifying inconsistency (zero row ≠ inconsistency; 0=nonzero is inconsistency)
+- Arithmetic error in multiplier m_{ik} — write it explicitly before applying
+- Back-substituting in wrong order (starting from x1 instead of last variable)
+- Stopping at upper triangular and calling it RREF (Gauss vs Gauss-Jordan confusion)
 
 ### Section 9: Comprehensive Assessment Suite
+**Viva-Voce (min 9 — 3 per sub-topic):**
+1–3: Rouché–Capelli theorem statement; geometric meaning of inconsistency; free variable count formula.
+4–6: Gauss elimination steps; partial pivoting purpose; verification method.
+7–9: Gauss-Jordan vs Gauss difference; RREF definition; parametric vector form.
 
-**Viva-Voce (7 Questions):**
-1. State the Rouché–Capelli theorem in full.
-2. What is the geometric meaning of an inconsistent system?
-3. How many free variables exist when rank[A] = r and unknowns = n?
-4. When does Gauss elimination fail and how do you fix it?
-5. What is the difference between Gauss and Gauss-Jordan methods?
-6. Can a non-square system have a unique solution?
-7. What does the augmented matrix [A|b] represent geometrically?
-
-**Descriptive Problems (4):**
-1. Solve a 3×3 consistent system with unique solution using Gauss elimination.
-2. Determine consistency and find general solution for an underdetermined 3×4 system.
-3. Show a given 3×3 system is inconsistent using rank test.
-4. Solve a 4×4 engineering system (nodal voltages) using Gauss-Jordan.
-
-**MCQs (5):** Covering consistency conditions, rank test, free variables, Gauss vs Gauss-Jordan, geometric interpretation.
+**Descriptive Problems (4). MCQs (min 6 — 2 per sub-topic).**
 
 ### Section 10: Quick Recap & Formula Sheet
-
-`learnbox` (8 bullets):
-- Augmented matrix: [A|b]; system Ax = b
-- Consistency: rank[A] = rank[A|b] → consistent; else inconsistent
-- Unique solution: rank[A] = rank[A|b] = n (number of unknowns)
-- Infinite solutions: rank[A] = rank[A|b] = r < n → (n−r) free variables
-- Gauss: Reduce to upper triangular → back-substitute
-- Gauss-Jordan: Reduce to RREF → read solution directly
-- Row operations: swap (÷det), scale, add-multiple — preserve solution set
-- Always verify solution by substituting back into ALL original equations
+`learnbox` (9 bullets):
+- Ax=b: consistent iff rank[A]=rank[A|b]
+- Unique solution: rank[A]=rank[A|b]=n
+- Infinite solutions: rank[A]=rank[A|b]=r<n → (n−r) free variables
+- Inconsistent: rank[A] ≠ rank[A|b]
+- Gauss: forward elimination → upper triangular → back-substitute
+- Gauss-Jordan: forward + backward elimination → RREF → direct read-off
+- Row op notation: $R_i \leftarrow R_i - m_{ik}R_k$, $m_{ik}=a_{ik}/a_{kk}$
+- General solution = particular + homogeneous (for infinite case)
+- ALWAYS verify: substitute solution into ALL original equations
 
 ---
 
 ## 3. STRICT QUALITY & COMPILATION SAFEGUARDS
-- [ ] All row operations labeled with standard notation: $R_i \leftarrow R_i - m_{ik} R_k$.
-- [ ] Augmented matrices use `\left[\begin{array}{ccc|c}...\end{array}\right]` format.
-- [ ] pgfplots geometric visuals must have axis ranges, labels, and `samples=100`.
-- [ ] Rouché–Capelli theorem stated in a formal `infobox` before use in examples.
-- [ ] All tcolorboxes closed; `\begin{document}` and `\end{document}` wrap everything.
+- [ ] Exactly 3 `\subsection{}` entries in Section 3.
+- [ ] Rouché–Capelli theorem stated formally in its own `infobox`.
+- [ ] Augmented matrix format: `\left[\begin{array}{ccc|c}...\end{array}\right]`.
+- [ ] All 3 consistency cases demonstrated in Example 1.
+- [ ] Back-substitution in Example 2 shown starting from last equation upward.
+- [ ] Verification (substituting back into ALL 3 original equations) shown in Example 2.
+- [ ] Parametric vector form in Example 4 uses column vector notation.
+- [ ] pgfplots 3-case visual has distinct colors, axis labels, intersection point marked.
+- [ ] All tcolorboxes closed; document wrapped in `\begin{document}...\end{document}`.
