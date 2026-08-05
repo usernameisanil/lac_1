@@ -55,16 +55,16 @@ The generated LaTeX document MUST start with this exact preamble:
 \tcbuselibrary{skins, breakable}
 
 % Define custom environments
-\newtcolorbox{curiositybox}[1]{colback=yellow!10, colframe=orange!80, title=#1, breakable}
-\newtcolorbox{infobox}[1]{colback=blue!5, colframe=blue!60, title=#1, breakable}
-\newtcolorbox{mistakebox}[1]{colback=red!5, colframe=red!60, title=#1, breakable}
-\newtcolorbox{learnbox}[1]{colback=green!5, colframe=green!60, title=#1, breakable}
+\newtcolorbox{curiositybox}[1][]{colback=yellow!10, colframe=orange!80, title=#1, breakable}
+\newtcolorbox{infobox}[1][]{colback=blue!5, colframe=blue!60, title=#1, breakable}
+\newtcolorbox{mistakebox}[1][]{colback=red!5, colframe=red!60, title=#1, breakable}
+\newtcolorbox{learnbox}[1][]{colback=green!5, colframe=green!60, title=#1, breakable}
 
 % Header and Footer
 \pagestyle{fancy}
 \fancyhf{}
 \lhead{Coordinate Systems}
-\rhead{Unit 5 — LAC}
+\rhead{Unit 5 --- LAC}
 \cfoot{\thepage}
 
 % Document Title Setup
@@ -131,8 +131,7 @@ Boxed workflow:
 1. **Example 1 — Polar (Basic):** Evaluate \(\iint_R e^{-(x^2+y^2)}\,dA\) over the unit disk using polar coordinates. Show full conversion, limit setup, and all integration steps. Conclude with `learnbox`.
 2. **Example 2 — Cylindrical (Intermediate):** Find the volume of the region inside the cylinder \(x^2+y^2=4\), above \(z=0\), and below \(z=3-r\). Show cylindrical setup and full evaluation. Conclude with `learnbox`.
 3. **Example 3 — Spherical (Applied Engineering):** Compute the mass of a solid hemisphere of radius \(a\) with density \(\rho = k z\) (density proportional to height — models sedimentation in a hemispherical tank). Interpret the result. Conclude with `learnbox`.
-
-> Optionally add Example 4: A general change-of-variables example using a non-standard substitution to reinforce Jacobian computation.
+4. **Example 4 — General Change of Variables (Mandatory):** Evaluate a double integral using a non-standard substitution (e.g., \(u = x+y,\; v = x-y\) or \(u = x/a,\; v = y/b\) for an elliptical region); compute the Jacobian explicitly and apply the change-of-variables formula completely. This example is **required** to satisfy the Sub-topic 1 worked-example mandate — it must not be omitted. Conclude with `learnbox`.
 
 ### Section 7: Tabular Comparison / Workflow Reference
 
@@ -168,3 +167,4 @@ Boxed workflow:
 - [ ] Consistent notation: \(\rho\) for spherical radial distance, \(r\) for cylindrical/polar radial distance.
 - [ ] All derivations show intermediate steps.
 - [ ] Assessment includes at least one viva and one MCQ per atomic sub-topic.
+- [ ] Section 6 contains **exactly 4 examples** — Example 4 (general change of variables) is mandatory and must not be omitted.
