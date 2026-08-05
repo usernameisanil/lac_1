@@ -47,10 +47,10 @@ This prompt covers **3 atomic sub-topics**. Each MUST appear as a separate named
 \pagestyle{fancy}
 \fancyhf{}
 \lhead{Direct Methods \& Applications}
-\rhead{Unit 1 — Matrix Algebra}
+\rhead{Unit 1 -- LAC}
 \cfoot{\thepage}
 
-\title{\textbf{Direct Methods: Cramer's Rule, Matrix Inversion \& Engineering Applications} \\ \large Unit 1 — Matrix Algebra and Linear Systems}
+\title{\textbf{Direct Methods: Cramer's Rule, Matrix Inversion \& Engineering Applications} \\ \large Unit 1 -- Matrix Algebra and Linear Systems}
 \author{Department of Mathematics}
 \date{\today}
 ```
