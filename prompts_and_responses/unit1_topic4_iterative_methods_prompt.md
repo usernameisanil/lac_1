@@ -48,7 +48,7 @@ This prompt covers **2 atomic sub-topics** plus 2 essential supporting concepts.
 \pagestyle{fancy}
 \fancyhf{}
 \lhead{Iterative Methods}
-\rhead{Unit 1 — Matrix Algebra}
+\rhead{Unit 1 — LAC}
 \cfoot{\thepage}
 
 \title{\textbf{Iterative Methods: Jacobi Method and Gauss-Seidel Method} \\ \large Unit 1 — Matrix Algebra and Linear Systems}
