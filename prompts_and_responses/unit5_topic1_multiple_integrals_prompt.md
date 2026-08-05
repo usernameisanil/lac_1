@@ -54,16 +54,16 @@ The generated LaTeX document MUST start with this exact preamble:
 \tcbuselibrary{skins, breakable}
 
 % Define custom environments
-\newtcolorbox{curiositybox}[1]{colback=yellow!10, colframe=orange!80, title=#1, breakable}
-\newtcolorbox{infobox}[1]{colback=blue!5, colframe=blue!60, title=#1, breakable}
-\newtcolorbox{mistakebox}[1]{colback=red!5, colframe=red!60, title=#1, breakable}
-\newtcolorbox{learnbox}[1]{colback=green!5, colframe=green!60, title=#1, breakable}
+\newtcolorbox{curiositybox}[1][]{colback=yellow!10, colframe=orange!80, title=#1, breakable}
+\newtcolorbox{infobox}[1][]{colback=blue!5, colframe=blue!60, title=#1, breakable}
+\newtcolorbox{mistakebox}[1][]{colback=red!5, colframe=red!60, title=#1, breakable}
+\newtcolorbox{learnbox}[1][]{colback=green!5, colframe=green!60, title=#1, breakable}
 
 % Header and Footer
 \pagestyle{fancy}
 \fancyhf{}
 \lhead{Multiple Integrals}
-\rhead{Unit 5 — LAC}
+\rhead{Unit 5 --- LAC}
 \cfoot{\thepage}
 
 % Document Title Setup
