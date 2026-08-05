@@ -20,11 +20,11 @@ This prompt covers **3 atomic sub-topics**. Each MUST appear as a separate named
 
 | # | Atomic Sub-Topic | Mandatory Coverage Requirements |
 |---|---|---|
-| 1 | **Consistency Conditions** | `infobox`: matrix form Ax=b; augmented matrix [A\|b]; Rouché–Capelli theorem (state formally): rank[A]=rank[A\|b] → consistent; rank[A]=rank[A\|b]=n → unique solution; rank[A]=rank[A\|b]=r<n → infinite solutions with (n−r) free variables; rank[A]≠rank[A\|b] → inconsistent. Include geometric interpretation: 2 equations = 2 lines → unique (intersect), infinite (same line), none (parallel). Worked Example: for each of 3 systems (unique, infinite, inconsistent), form augmented matrix, compute both ranks, apply theorem, state nature of solution — all three cases in one example. |
+| 1 | **Consistency Conditions (Rouché–Capelli Theorem)** | `infobox`: matrix form Ax=b; augmented matrix [A\|b]; **Rouché–Capelli Theorem** (state formally by name, with proof sketch): rank[A]=rank[A\|b] → consistent; rank[A]=rank[A\|b]=n → unique solution; rank[A]=rank[A\|b]=r<n → infinite solutions with (n−r) free variables; rank[A]≠rank[A\|b] → inconsistent. The theorem MUST be displayed in a named `infobox` titled "Rouché–Capelli Theorem". Include geometric interpretation: 2 equations = 2 lines → unique (intersect), infinite (same line), none (parallel). Worked Example: for each of 3 systems (unique, infinite, inconsistent), form augmented matrix, compute both ranks, apply theorem by name, state nature of solution — all three cases in one example. |
 | 2 | **Gauss Elimination Method** | `infobox`: forward elimination to upper triangular form + back substitution; multiplier formula m_{ik}=a_{ik}/a_{kk}; row operation Ri→Ri−m_{ik}Rk; partial pivoting note (swap rows if pivot is zero). Full step-by-step algorithm boxed. Worked Example: solve a 3×3 system with unique solution — write augmented matrix, perform ALL elimination steps with labeled operations, back-substitute from last equation upward, write final solution, VERIFY by substituting into all 3 original equations. |
 | 3 | **Gauss-Jordan Method** | `infobox`: extend Gauss elimination upward — eliminate both ABOVE and BELOW each pivot to reach RREF; solution read directly from last column with no back-substitution needed. Difference from Gauss: Gauss stops at upper triangular; Gauss-Jordan continues to RREF. Worked Example: solve a 3×3 system using Gauss-Jordan — show all upward elimination steps labeled, display final RREF, read off solution directly. Then solve a 3×4 system with infinite solutions — express general solution in parametric vector form. |
 
-**ENFORCEMENT RULE:** 3 named `\subsection{}` entries required. Geometric visualization (3 cases) mandatory for Sub-Topic 1. Assessment must contain at least 2 viva questions and 2 MCQs per sub-topic.
+**ENFORCEMENT RULE:** 3 named `\subsection{}` entries required. Sub-Topic 1 subsection MUST be titled `\subsection{Consistency Conditions and the Rouché–Capelli Theorem}` and contain a dedicated `infobox` with the theorem stated formally by that exact name. Geometric visualization (3 cases) mandatory for Sub-Topic 1. Assessment must contain at least 2 viva questions and 2 MCQs per sub-topic. At least one viva question must ask students to state the Rouché–Capelli Theorem by name.
 
 ---
 
@@ -47,7 +47,7 @@ This prompt covers **3 atomic sub-topics**. Each MUST appear as a separate named
 \pagestyle{fancy}
 \fancyhf{}
 \lhead{System of Linear Equations}
-\rhead{Unit 1 — Matrix Algebra}
+\rhead{Unit 1 — LAC}
 \cfoot{\thepage}
 
 \title{\textbf{System of Linear Equations: Consistency, Gauss Elimination \& Gauss-Jordan Method} \\ \large Unit 1 — Matrix Algebra and Linear Systems}
@@ -68,19 +68,19 @@ This prompt covers **3 atomic sub-topics**. Each MUST appear as a separate named
 - `learnbox`: "Knowing whether a solution exists — and how many — is the first question every engineer must answer."
 
 ### Section 3: Intuition First & Definitions (3 Subsections)
-- `\subsection{Consistency Conditions and the Rouché–Capelli Theorem}`
+- `\subsection{Consistency Conditions and the Rouché–Capelli Theorem}`
 - `\subsection{Gauss Elimination Method}`
 - `\subsection{Gauss-Jordan Method}`
-Each: conversational intuition → dedicated `infobox` with formal theorem/algorithm from Section 0.
+Each: conversational intuition → dedicated `infobox` with formal theorem/algorithm from Section 0. Sub-Topic 1 MUST have a distinct `infobox` titled **"Rouché–Capelli Theorem"** containing the formal statement.
 
 ### Section 4: Visual Artifacts (MANDATORY)
 - **Visual 1 (pgfplots):** Three side-by-side 2D plots — Case 1: intersecting lines (unique solution, mark point); Case 2: parallel lines (no solution, label "Inconsistent"); Case 3: identical lines (infinite solutions, label "Infinite").
 - **Visual 2 (TikZ):** Augmented matrix transformation stages — [A|b] original → after forward elimination → upper triangular → after back-sub → solution vector. Color-code pivot entries.
-- **Visual 3 (TikZ):** Decision flowchart — Ax=b → compute rank[A] and rank[A|b] → compare → branch to three outcome boxes.
+- **Visual 3 (TikZ):** Decision flowchart — Ax=b → compute rank[A] and rank[A|b] → compare → branch to three outcome boxes labelled with Rouché–Capelli cases.
 - **Visual 4 (TikZ):** Gauss vs Gauss-Jordan comparison — show same matrix being reduced: Gauss stops at upper triangular, Gauss-Jordan continues to RREF.
 
 ### Section 5: Step-by-Step Algorithmic Workflows
-1. **Consistency Check Algorithm** — compute rank[A], rank[A|b], apply Rouché–Capelli, determine nature.
+1. **Consistency Check Algorithm (Rouché–Capelli)** — compute rank[A], rank[A|b], apply theorem by name, determine nature.
 2. **Gauss Elimination Algorithm** — forward sweep with partial pivoting note, back-substitution from last row upward.
 3. **Gauss-Jordan Algorithm** — forward AND backward sweep, RREF, direct solution read-off.
 4. **General Solution for Infinite Cases** — identify free variables, parametrize, write vector form.
@@ -88,8 +88,8 @@ Each: conversational intuition → dedicated `infobox` with formal theorem/algor
 ### Section 6: Fully Worked Examples (4 — covering all sub-topics with extra depth)
 
 **Example 1 — All Three Consistency Cases:**
-Present three 3×3 systems. For each: form augmented matrix, row-reduce, compute rank[A] and rank[A|b], state nature of solution by Rouché–Capelli theorem.
-`learnbox`: "Always check consistency before solving — saves time and avoids meaningless computation."
+Present three 3×3 systems. For each: form augmented matrix, row-reduce, compute rank[A] and rank[A|b], apply the Rouché–Capelli theorem by name, state nature of solution.
+`learnbox`: "Always apply the Rouché–Capelli theorem first — saves time and avoids meaningless computation."
 
 **Example 2 — Gauss Elimination (Unique Solution):**
 Solve x+y+z=6, 2x−y+3z=14, 3x+2y−z=2. Write [A|b], perform R2→R2−2R1, R3→R3−3R1, then R3→R3−(8/3)R2. Back-substitute upward — show every arithmetic step. Verify all 3 original equations.
@@ -105,11 +105,11 @@ Solve a 3×4 underdetermined system. Identify r free variables. Write general so
 
 ### Section 7: Tabular Reference
 `booktabs` table: Method | Reduction Target | Back-Sub Needed | Cost | Best For.
-Second table: Rouché–Capelli theorem — all 3 cases with rank conditions, solution type, geometric meaning, engineering example.
+Second table: Rouché–Capelli theorem — all 3 cases with rank conditions, solution type, geometric meaning, engineering example.
 
 ### Section 8: Common Student Mistakes & Pitfalls
 `mistakebox` — one per sub-topic plus extras:
-- Not checking consistency before solving
+- Not checking consistency (Rouché–Capelli) before solving
 - Misidentifying inconsistency (zero row ≠ inconsistency; 0=nonzero is inconsistency)
 - Arithmetic error in multiplier m_{ik} — write it explicitly before applying
 - Back-substituting in wrong order (starting from x1 instead of last variable)
@@ -117,7 +117,7 @@ Second table: Rouché–Capelli theorem — all 3 cases with rank conditions, so
 
 ### Section 9: Comprehensive Assessment Suite
 **Viva-Voce (min 9 — 3 per sub-topic):**
-1–3: Rouché–Capelli theorem statement; geometric meaning of inconsistency; free variable count formula.
+1–3: State the Rouché–Capelli theorem by name and in full; geometric meaning of inconsistency; free variable count formula (n−r).
 4–6: Gauss elimination steps; partial pivoting purpose; verification method.
 7–9: Gauss-Jordan vs Gauss difference; RREF definition; parametric vector form.
 
@@ -125,7 +125,7 @@ Second table: Rouché–Capelli theorem — all 3 cases with rank conditions, so
 
 ### Section 10: Quick Recap & Formula Sheet
 `learnbox` (9 bullets):
-- Ax=b: consistent iff rank[A]=rank[A|b]
+- Rouché–Capelli Theorem: Ax=b consistent ⇔ rank[A]=rank[A|b]
 - Unique solution: rank[A]=rank[A|b]=n
 - Infinite solutions: rank[A]=rank[A|b]=r<n → (n−r) free variables
 - Inconsistent: rank[A] ≠ rank[A|b]
@@ -139,9 +139,9 @@ Second table: Rouché–Capelli theorem — all 3 cases with rank conditions, so
 
 ## 3. STRICT QUALITY & COMPILATION SAFEGUARDS
 - [ ] Exactly 3 `\subsection{}` entries in Section 3.
-- [ ] Rouché–Capelli theorem stated formally in its own `infobox`.
+- [ ] Rouché–Capelli theorem stated formally in its own named `infobox` titled "Rouché–Capelli Theorem".
 - [ ] Augmented matrix format: `\left[\begin{array}{ccc|c}...\end{array}\right]`.
-- [ ] All 3 consistency cases demonstrated in Example 1.
+- [ ] All 3 consistency cases demonstrated in Example 1 with explicit reference to Rouché–Capelli.
 - [ ] Back-substitution in Example 2 shown starting from last equation upward.
 - [ ] Verification (substituting back into ALL 3 original equations) shown in Example 2.
 - [ ] Parametric vector form in Example 4 uses column vector notation.
