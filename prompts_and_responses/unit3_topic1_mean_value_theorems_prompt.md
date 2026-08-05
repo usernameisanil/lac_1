@@ -52,20 +52,20 @@ No atomic sub-topic may be merged into another or only mentioned in passing.
 \tcbuselibrary{skins, breakable}
 
 % Define custom environments
-\newtcolorbox{curiositybox}[1]{colback=yellow!10, colframe=orange!80, title=#1, breakable}
-\newtcolorbox{infobox}[1]{colback=blue!5, colframe=blue!60, title=#1, breakable}
-\newtcolorbox{mistakebox}[1]{colback=red!5, colframe=red!60, title=#1, breakable}
-\newtcolorbox{learnbox}[1]{colback=green!5, colframe=green!60, title=#1, breakable}
+\newtcolorbox{curiositybox}[1][]{colback=yellow!10, colframe=orange!80, title=#1, breakable}
+\newtcolorbox{infobox}[1][]{colback=blue!5, colframe=blue!60, title=#1, breakable}
+\newtcolorbox{mistakebox}[1][]{colback=red!5, colframe=red!60, title=#1, breakable}
+\newtcolorbox{learnbox}[1][]{colback=green!5, colframe=green!60, title=#1, breakable}
 
 % Header and Footer
 \pagestyle{fancy}
 \fancyhf{}
 \lhead{Mean Value Theorems}
-\rhead{Unit 3 — Single Variable Calculus}
+\rhead{Unit 3 -- LAC}
 \cfoot{\thepage}
 
 % Document Title Setup
-\title{\textbf{Mean Value Theorems} \\ \large Unit 3 — Single Variable Calculus and Series Expansions}
+\title{\textbf{Mean Value Theorems} \\ \large Unit 3 -- Single Variable Calculus and Series Expansions}
 \author{Department of Mathematics}
 \date{\today}
 ```
