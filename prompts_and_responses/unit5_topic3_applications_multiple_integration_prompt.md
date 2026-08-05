@@ -55,10 +55,10 @@ The generated LaTeX document MUST start with this exact preamble:
 \tcbuselibrary{skins, breakable}
 
 % Define custom environments
-\newtcolorbox{curiositybox}[1]{colback=yellow!10, colframe=orange!80, title=#1, breakable}
-\newtcolorbox{infobox}[1]{colback=blue!5, colframe=blue!60, title=#1, breakable}
-\newtcolorbox{mistakebox}[1]{colback=red!5, colframe=red!60, title=#1, breakable}
-\newtcolorbox{learnbox}[1]{colback=green!5, colframe=green!60, title=#1, breakable}
+\newtcolorbox{curiositybox}[1][]{colback=yellow!10, colframe=orange!80, title=#1, breakable}
+\newtcolorbox{infobox}[1][]{colback=blue!5, colframe=blue!60, title=#1, breakable}
+\newtcolorbox{mistakebox}[1][]{colback=red!5, colframe=red!60, title=#1, breakable}
+\newtcolorbox{learnbox}[1][]{colback=green!5, colframe=green!60, title=#1, breakable}
 
 % Header and Footer
 \pagestyle{fancy}
@@ -130,8 +130,7 @@ Boxed workflow:
 1. **Example 1 — Area Between Curves:** Find the area enclosed between \(y = x^2\) and \(y = x+2\). Show intersection points, limit setup, and full integration. Conclude with `learnbox`.
 2. **Example 2 — Centroid of a Lamina:** Find the centroid of the triangular lamina with vertices \((0,0),(3,0),(0,2)\) and uniform density. Show \(M\), \(M_x\), \(M_y\) calculations in full. Conclude with `learnbox`.
 3. **Example 3 — Moment of Inertia (Engineering):** Compute \(I_y\) for a rectangular plate \(0 \le x \le a,\; 0 \le y \le b\) with uniform density \(\rho_0\). Identify the radius of gyration and explain its significance for beam design. Conclude with `learnbox`.
-
-> Optionally add Example 4: Total fluid pressure force on a triangular dam gate submerged in water.
+4. **Example 4 (MANDATORY — required to satisfy the Section 0 worked-example mandate for Sub-Topic 4, "Engineering Applications of Multiple Integration"):** Compute the total fluid pressure force on a triangular dam gate submerged in water, using \(F = \iint_R \rho g h(x,y)\,dA\). Show the full setup of \(h(x,y)\) as depth below the water surface, the region \(R\) describing the gate geometry, and complete evaluation of the integral. Conclude with `learnbox`.
 
 ### Section 7: Tabular Comparison / Workflow Reference
 
@@ -165,7 +164,9 @@ Include rows for: Area, Volume (under surface), Volume (of solid), Mass (2D), Ma
 - [ ] Section 3 contains **exactly 4 `\subsection{}` entries**.
 - [ ] No missing brackets, undefined control sequences, or unescaped special characters.
 - [ ] Every `curiositybox`, `infobox`, `mistakebox`, and `learnbox` properly opened and closed.
+- [ ] All `\newtcolorbox` definitions use the `[1][]{...}` optional-argument syntax (not bare `[1]{...}`), so environments compile correctly whether or not a title argument is supplied.
 - [ ] All TikZ/pgfplots visuals self-contained and compilable with `pdflatex`.
 - [ ] Consistent notation throughout (\(\rho\) for density, \(r\) for radial distance in moment of inertia).
 - [ ] All derivations show intermediate steps.
 - [ ] Assessment includes at least one viva and one MCQ per atomic sub-topic.
+- [ ] Section 6 contains **4 examples (not 3 + optional)** — Example 4 (fluid pressure on dam gate) is mandatory to fully satisfy the Sub-Topic 4 worked-example requirement.
