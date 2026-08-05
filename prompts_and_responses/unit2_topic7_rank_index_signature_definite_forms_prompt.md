@@ -1,4 +1,4 @@
-# Generated Prompt — Topic: Rank, Index, Signature, and Definite Forms
+# Generated Prompt — Topic: Rank, Index, Signature and Definite Forms
 
 **Unit:** Unit 2 — Eigenvalues, Eigenvectors, Diagonalization and Quadratic Forms  
 **Course:** Linear Algebra and Calculus (B.Tech 1st Year)  
@@ -8,7 +8,7 @@
 
 ## PROMPT INSTRUCTIONS
 
-You are an expert engineering mathematics professor writing a **complete, 100% compilable LaTeX (.tex) lecture note** on the topic **"Rank, Index, Signature, and Definite Forms of Quadratic Forms"**.
+You are an expert engineering mathematics professor writing a **complete, 100% compilable LaTeX (.tex) lecture note** on the topic **"Rank, Index, Signature, and Definite Forms"**.
 
 Write as an enthusiastic, patient teacher who builds deep intuition, connects abstract concepts to real-world engineering applications, and ensures students never feel overwhelmed by mathematical notation.
 
@@ -19,6 +19,7 @@ Write as an enthusiastic, patient teacher who builds deep intuition, connects ab
 This prompt covers a set of **atomic sub-topics** from the syllabus for the group topic **"Rank, Index, Signature, and Definite Forms"**.
 
 The generated LaTeX document MUST treat **EACH atomic sub-topic** as a **separate, named subsection** with:
+
 - A dedicated `infobox` containing formal definitions/properties/algorithms for that sub-topic.
 - At least **one fully worked numerical/symbolic example** explicitly targeting that sub-topic.
 - At least **one assessment item** (viva question or MCQ) explicitly tied to that sub-topic.
@@ -27,20 +28,23 @@ No atomic sub-topic may be merged into another or only mentioned in passing.
 
 | # | Atomic Sub-Topic | Mandatory Coverage Requirements |
 |---|------------------|---------------------------------|
-| 1 | Rank of a Quadratic Form | `infobox`: rank equals the number of non-zero terms in canonical form = rank of the associated matrix $A$; connection to dimension of range space. Worked example: find the rank of a 3-variable quadratic form from its canonical form. MCQ on rank interpretation. |
-| 2 | Index of a Quadratic Form | `infobox`: index = number of positive squared terms in the canonical form under any non-singular transformation; proof that it is an invariant (Sylvester's Law of Inertia). Worked example: identify the index of a given canonical form. Viva: can two canonical forms of the same quadratic form have different indices? |
-| 3 | Signature of a Quadratic Form | `infobox`: signature = (number of positive terms $p$, number of negative terms $q$); relation to rank $r=p+q$; invariance under non-singular transformations. Worked example: state the signature of a 3-variable form. MCQ on interpreting signature $(2,1)$. |
-| 4 | Sylvester’s Law of Inertia | `infobox`: formal statement — rank, index, and signature are invariants under any non-singular congruence transformation; any two canonical forms of the same quadratic form agree in $p$ and $q$. Worked example: verify the law by computing canonical form via two different transformations and confirming same $(p,q)$. Viva: what does Sylvester's Law guarantee? |
-| 5 | Classification of Definite Forms and Sylvester’s Criterion | `infobox`: positive definite iff all eigenvalues $>0$ iff all leading principal minors $>0$ (Sylvester’s criterion); negative definite iff alternating signs of principal minors; semi-definite and indefinite conditions. Worked example: test positive definiteness using Sylvester’s criterion on a 3×3 matrix. MCQ on Sylvester’s criterion for a 2×2 matrix. |
+| 1 | Rank of a Quadratic Form | Define rank as number of non-zero eigenvalues (equivalently, rank of associated matrix A); one worked example; one viva and one MCQ. |
+| 2 | Index of a Quadratic Form | Define index p as number of positive eigenvalues (positive terms in canonical form); one worked example computing index; one viva and one MCQ. |
+| 3 | Signature of a Quadratic Form | Define signature as p − q where q = rank − p (number of negative eigenvalues); one worked example; one viva and one MCQ. |
+| 4 | Sylvester's Law of Inertia | State: any two congruent real symmetric matrices have the same rank, index, and signature; invariance under non-singular linear transformations; one worked example verifying invariance; one viva and one MCQ. |
+| 5 | Definite Forms and Sylvester's Criterion | Classify positive definite (all leading principal minors > 0), negative definite, semi-definite, indefinite; Sylvester's criterion; one worked example applying the criterion; one viva and one MCQ. |
 
 **ENFORCEMENT RULES:**
-1. Section 3 must contain **exactly 5 named `\subsection{}` entries**, one per row above.
-2. Section 9 must contain **at least one viva-voce question and one MCQ per atomic sub-topic** (minimum 5 viva, 5 MCQ).
+
+1. The document must contain **exactly 5 named `\subsection{}` entries** in the main definitions section (Section 3).
+2. The **assessment section** (Section 9) must contain **at least 5 viva-voce questions (≥1 per sub-topic)** and **at least 5 MCQs (≥1 per sub-topic)**.
 3. Each atomic sub-topic must have a dedicated `infobox`, at least one fully worked example, and at least one assessment item.
 
 ---
 
 ## 1. LATEX PREAMBLE & CONFIGURATION REQUIREMENTS
+
+The generated LaTeX document MUST start with this exact preamble:
 
 ```latex
 \documentclass[12pt,a4paper]{article}
@@ -51,18 +55,21 @@ No atomic sub-topic may be merged into another or only mentioned in passing.
 \pgfplotsset{compat=1.18}
 \tcbuselibrary{skins, breakable}
 
+% Define custom environments
 \newtcolorbox{curiositybox}[1][]{colback=yellow!10, colframe=orange!80, title=#1, breakable}
 \newtcolorbox{infobox}[1][]{colback=blue!5, colframe=blue!60, title=#1, breakable}
 \newtcolorbox{mistakebox}[1][]{colback=red!5, colframe=red!60, title=#1, breakable}
 \newtcolorbox{learnbox}[1][]{colback=green!5, colframe=green!60, title=#1, breakable}
 
+% Header and Footer
 \pagestyle{fancy}
 \fancyhf{}
-\lhead{Rank, Index, Signature \& Definite Forms}
-\rhead{Unit 2 — Quadratic Forms}
+\lhead{Rank, Index, Signature and Definite Forms}
+\rhead{Unit 2 -- LAC}
 \cfoot{\thepage}
 
-\title{\textbf{Rank, Index, Signature, and Definite Forms} \\ \large Unit 2: Eigenvalues, Eigenvectors, Diagonalization and Quadratic Forms}
+% Document Title Setup
+\title{\textbf{Rank, Index, Signature, and Definite Forms} \\ \large Unit 2 -- Eigenvalues, Eigenvectors, Diagonalization and Quadratic Forms}
 \author{Department of Mathematics}
 \date{\today}
 ```
@@ -71,61 +78,56 @@ No atomic sub-topic may be merged into another or only mentioned in passing.
 
 ## 2. MANDATORY DOCUMENT SECTIONS & ARCHITECTURE
 
+Generate a document containing ALL of the following sections in strict logical sequence.
+
 ### Section 1: Real-World Engineering Hook (Curiosity Box)
-- `curiositybox` titled **"Why Should an Engineer Care?"**
-- Scenario: **Structural stability** — the potential energy of a mechanical system near equilibrium is a quadratic form; if it is positive definite (index = $n$), the equilibrium is stable; if indefinite, the structure may buckle or diverge. Testing positive definiteness via Sylvester’s criterion is used routinely in finite element analysis.
+- Open with a `curiositybox` titled **"Why Should an Engineer Care?"**.
+- Scenario: Lyapunov stability analysis requires the Lyapunov function V(x) = xᵀPx to be positive definite; checking Sylvester's criterion on P confirms the system is stable. Explain what indefinite P means for control design.
 
 ### Section 2: Why This Topic Exists (Theory vs Real-World Impact)
-- 2-column `booktabs` table with at least one row per atomic sub-topic.
-- Conclude with a `learnbox`.
+- Include a `booktabs` table with one row per atomic sub-topic linking theory to engineering consequence.
+- Conclude with a `learnbox` on core objectives.
 
 ### Section 3: Intuition First & Mathematical Definitions (Subsections per Sub-Topic)
+For **each of the 5 atomic sub-topics**:
+- Named `\subsection{}` entry.
+- 2–4 lines conversational intuition.
+- `infobox` with formal definitions, notation, key theorems.
 
-Create **exactly 5 named `\subsection{}` entries**, one per atomic sub-topic:
-
-1. `\subsection{Rank of a Quadratic Form}`
-2. `\subsection{Index of a Quadratic Form}`
-3. `\subsection{Signature of a Quadratic Form}`
-4. `\subsection{Sylvester's Law of Inertia}`
-5. `\subsection{Classification of Definite Forms and Sylvester's Criterion}`
-
-### Section 4: Visual Artifacts & Geometric Interpretation (MANDATORY LaTeX Visuals)
-- **Visual 1 (pgfplots):** 3D surface plot of a positive definite quadratic form $Q(x,y)=x^2+xy+y^2$ showing bowl-shaped surface with minimum at origin.
-- **Visual 2 (pgfplots):** Surface or contour of an indefinite form showing saddle point.
+### Section 4: Visual Artifacts & Geometric Interpretation
+- TikZ diagram: sign pattern of eigenvalues → classification of quadratic form (PD, ND, indefinite, etc.).
+- pgfplots: 3D plots of positive definite vs indefinite quadratic forms.
 
 ### Section 5: Step-by-Step Algorithmic Solution / Workflow
-Boxed workflow:
-1. Form symmetric matrix $A$ of the quadratic form
-2. Find canonical form (via eigenvalues or Lagrange’s method)
-3. Count: total non-zero terms = rank; positive terms = index; signature = $(p,q)$
-4. Classify nature: read signs of eigenvalues or apply Sylvester’s criterion
-5. Verify: confirm rank, index, signature are invariant under a different transformation
+- Workflow: (a) find eigenvalues, (b) compute rank/index/signature, (c) apply Sylvester's criterion, (d) classify definiteness.
 
 ### Section 6: Fully Worked Step-by-Step Numerical Examples
-At least **THREE (3)** examples inside `infobox` environments:
-- **Example 1:** Find rank, index, signature of $2x^2+3y^2-z^2+2xy$.
-- **Example 2:** Test positive definiteness of $A = \begin{pmatrix}2&1\\1&3\end{pmatrix}$ using Sylvester’s criterion.
-- **Example 3:** Verify Sylvester’s Law of Inertia by reducing a form via two different methods and confirming same $(p,q)$.
-- **Example 4 (Applied):** Check whether the potential energy function of a structural system is positive definite.
+- **Example 1:** For Q = xᵀAx, compute rank, index, signature of A.
+- **Example 2:** Apply Sylvester's criterion to a 3×3 symmetric matrix; classify.
+- **Example 3 (Engineering):** Test if a Lyapunov matrix P from a control problem is positive definite.
 
 ### Section 7: Tabular Comparison / Workflow Reference
-- Table: Complete classification of quadratic forms — type, eigenvalue condition, Sylvester’s criterion condition, signature, engineering meaning.
+- Table: all five definiteness classes — eigenvalue condition, Sylvester criterion condition, geometric interpretation.
 
 ### Section 8: Common Student Mistakes & Pitfalls
-`mistakebox` with **Mistake | Why Students Do It | Correct Approach** columns. At least one row per atomic sub-topic.
+- `mistakebox` with `tabular`: at least one row per atomic sub-topic.
 
 ### Section 9: Comprehensive Assessment Suite
-1. **Viva-Voce (6–8, at least one per atomic sub-topic)**
-2. **Descriptive Problems (4–5)**
-3. **MCQs (5 or more, at least one per atomic sub-topic):** Bold correct answer, single-line explanation.
+1. **Viva-Voce Questions (8–10):** At least one per sub-topic.
+2. **Descriptive Exam Questions (4–5):** Full problems with answer hints.
+3. **MCQs (6+):** 4 options each, bold correct answer, one-line explanation, ≥1 per sub-topic.
 
 ### Section 10: Quick Recap & Formula Sheet
-- `learnbox` with 6–8 bullets.
+- `learnbox` with 6–8 bullet points: rank/index/signature definitions, Sylvester's Law of Inertia, Sylvester's criterion steps, definiteness classification table.
 
 ---
 
 ## 3. STRICT QUALITY & COMPILATION SAFEGUARDS
-- [ ] `\begin{document}` and `\end{document}` wrap entire code.
-- [ ] Section 3 contains **exactly 5 named `\subsection{}` entries**.
-- [ ] All TikZ/pgfplots visuals are self-contained.
-- [ ] Section 9 has at least one viva and one MCQ per atomic sub-topic.
+
+- [ ] `\begin{document}` and `\end{document}` wrap entire content.
+- [ ] Section 3 contains **exactly 5 `\subsection{}` entries**.
+- [ ] No missing brackets, undefined control sequences, or unescaped special characters.
+- [ ] Every custom box is properly opened and closed.
+- [ ] All TikZ/pgfplots visuals are self-contained and compilable with `pdflatex`.
+- [ ] Matrix notation uses `\begin{pmatrix}...\end{pmatrix}`.
+- [ ] Assessment section has at least **5 viva questions and 5 MCQs (≥1 per sub-topic)**.

@@ -19,6 +19,7 @@ Write as an enthusiastic, patient teacher who builds deep intuition, connects ab
 This prompt covers a set of **atomic sub-topics** from the syllabus for the group topic **"Diagonalization and Similarity Transformation"**.
 
 The generated LaTeX document MUST treat **EACH atomic sub-topic** as a **separate, named subsection** with:
+
 - A dedicated `infobox` containing formal definitions/properties/algorithms for that sub-topic.
 - At least **one fully worked numerical/symbolic example** explicitly targeting that sub-topic.
 - At least **one assessment item** (viva question or MCQ) explicitly tied to that sub-topic.
@@ -27,20 +28,23 @@ No atomic sub-topic may be merged into another or only mentioned in passing.
 
 | # | Atomic Sub-Topic | Mandatory Coverage Requirements |
 |---|------------------|---------------------------------|
-| 1 | Similarity Transformation | `infobox` must define $B=P^{-1}AP$; state that similar matrices share the same eigenvalues, characteristic polynomial, trace, and determinant; define equivalence relation. Worked example: verify two matrices are similar by computing $P^{-1}AP$. MCQ: which properties are preserved under similarity? |
-| 2 | Diagonalizability Condition | `infobox`: $A$ is diagonalisable iff it has $n$ linearly independent eigenvectors; equivalently, for each eigenvalue, geometric multiplicity = algebraic multiplicity; sufficient condition: $n$ distinct eigenvalues. Worked example: test diagonalisability of a matrix with repeated eigenvalue. Viva: is every symmetric matrix diagonalisable? |
-| 3 | Diagonalization Procedure (Modal Matrix) | `infobox`: steps — find all eigenvalues, find eigenvectors, form modal matrix $P$ (columns = eigenvectors), compute $D=P^{-1}AP$ (diagonal matrix of eigenvalues). Worked example: full diagonalisation of a 3×3 matrix with 3 distinct eigenvalues. MCQ on the diagonal entries of $D$. |
-| 4 | Computing Matrix Powers via Diagonalization | `infobox`: $A^k = P D^k P^{-1}$ where $D^k$ is trivial (raise each diagonal entry to power $k$); extend to matrix functions $f(A)=Pf(D)P^{-1}$. Worked example: compute $A^{10}$ efficiently using diagonalisation. Viva: how does diagonalisation simplify computing $e^{At}$? |
-| 5 | Orthogonal Diagonalization of Symmetric Matrices | `infobox`: real symmetric matrices have real eigenvalues and orthogonal eigenvectors for distinct eigenvalues; Spectral Theorem — $A=Q\Lambda Q^T$ where $Q$ is orthogonal; procedure includes Gram-Schmidt if eigenvalues are repeated. Worked example: orthogonally diagonalise a 2×2 symmetric matrix. MCQ on the condition for orthogonal diagonalisation. |
+| 1 | Similarity Transformation | Define B = P⁻¹AP; show similar matrices share eigenvalues, trace, determinant, rank; one worked example; one viva and one MCQ. |
+| 2 | Diagonalizability Condition | Matrix A is diagonalizable iff it has n linearly independent eigenvectors; equivalent condition: geometric multiplicity = algebraic multiplicity for every eigenvalue; one worked example (diagonalizable and non-diagonalizable cases); one viva and one MCQ. |
+| 3 | Diagonalization Procedure | Step-by-step: find eigenvalues, find eigenvectors, form P (eigenvectors as columns), verify D = P⁻¹AP is diagonal; one fully worked 3×3 example; one viva and one MCQ. |
+| 4 | Powers of Matrix via Diagonalization | Aⁿ = PDⁿP⁻¹ where Dⁿ is diagonal with λᵢⁿ; one worked example computing A⁵ via diagonalization; one viva and one MCQ. |
+| 5 | Orthogonal Diagonalization | For symmetric matrices: eigenvectors for distinct eigenvalues are orthogonal; orthonormal eigenvectors form Q with A = QΛQᵀ; Gram-Schmidt for repeated eigenvalues; one viva and one MCQ. |
 
 **ENFORCEMENT RULES:**
-1. Section 3 must contain **exactly 5 named `\subsection{}` entries**, one per row above.
-2. Section 9 must contain **at least one viva-voce question and one MCQ per atomic sub-topic** (minimum 5 viva, 5 MCQ).
+
+1. The document must contain **exactly 5 named `\subsection{}` entries** in the main definitions section (Section 3).
+2. The **assessment section** (Section 9) must contain **at least 5 viva-voce questions (≥1 per sub-topic)** and **at least 5 MCQs (≥1 per sub-topic)**.
 3. Each atomic sub-topic must have a dedicated `infobox`, at least one fully worked example, and at least one assessment item.
 
 ---
 
 ## 1. LATEX PREAMBLE & CONFIGURATION REQUIREMENTS
+
+The generated LaTeX document MUST start with this exact preamble:
 
 ```latex
 \documentclass[12pt,a4paper]{article}
@@ -51,18 +55,21 @@ No atomic sub-topic may be merged into another or only mentioned in passing.
 \pgfplotsset{compat=1.18}
 \tcbuselibrary{skins, breakable}
 
+% Define custom environments
 \newtcolorbox{curiositybox}[1][]{colback=yellow!10, colframe=orange!80, title=#1, breakable}
 \newtcolorbox{infobox}[1][]{colback=blue!5, colframe=blue!60, title=#1, breakable}
 \newtcolorbox{mistakebox}[1][]{colback=red!5, colframe=red!60, title=#1, breakable}
 \newtcolorbox{learnbox}[1][]{colback=green!5, colframe=green!60, title=#1, breakable}
 
+% Header and Footer
 \pagestyle{fancy}
 \fancyhf{}
-\lhead{Diagonalization \& Similarity}
-\rhead{Unit 2 — Eigenanalysis}
+\lhead{Diagonalization and Similarity Transformation}
+\rhead{Unit 2 -- LAC}
 \cfoot{\thepage}
 
-\title{\textbf{Diagonalization and Similarity Transformation} \\ \large Unit 2: Eigenvalues, Eigenvectors, Diagonalization and Quadratic Forms}
+% Document Title Setup
+\title{\textbf{Diagonalization and Similarity Transformation} \\ \large Unit 2 -- Eigenvalues, Eigenvectors, Diagonalization and Quadratic Forms}
 \author{Department of Mathematics}
 \date{\today}
 ```
@@ -71,64 +78,56 @@ No atomic sub-topic may be merged into another or only mentioned in passing.
 
 ## 2. MANDATORY DOCUMENT SECTIONS & ARCHITECTURE
 
+Generate a document containing ALL of the following sections in strict logical sequence.
+
 ### Section 1: Real-World Engineering Hook (Curiosity Box)
-- `curiositybox` titled **"Why Should an Engineer Care?"**
-- Scenario: **Principal Component Analysis (PCA) in data engineering / image compression** — diagonalisation decomposes a covariance matrix into principal directions (eigenvectors) and variances (eigenvalues), enabling dimension reduction. Also: computing structural mode shapes and decoupling a system of differential equations.
+- Open with a `curiositybox` titled **"Why Should an Engineer Care?"**.
+- Scenario: decoupling differential equations in multi-DOF vibration systems; PCA (Principal Component Analysis) in data compression; simplifying repeated matrix multiplications in Markov chains and population dynamics.
 
 ### Section 2: Why This Topic Exists (Theory vs Real-World Impact)
-- 2-column `booktabs` table with at least one row per atomic sub-topic.
-- Conclude with a `learnbox`.
+- Include a `booktabs` table with one row per atomic sub-topic linking theory to engineering consequence.
+- Conclude with a `learnbox` on core objectives.
 
 ### Section 3: Intuition First & Mathematical Definitions (Subsections per Sub-Topic)
+For **each of the 5 atomic sub-topics**:
+- Named `\subsection{}` entry.
+- 2–4 lines conversational intuition.
+- `infobox` with formal definitions, notation, key theorems.
 
-Create **exactly 5 named `\subsection{}` entries**, one per atomic sub-topic. Begin each with 2–4 lines of intuition followed by a dedicated `infobox`.
-
-### Section 4: Visual Artifacts & Geometric Interpretation (MANDATORY LaTeX Visuals)
-- **Visual 1 (TikZ):** Show a transformation $A$ in original coordinates, then $D = P^{-1}AP$ in eigen-coordinates, with axes rotated to eigenvector directions.
-- **Visual 2 (pgfplots):** Visualise eigenvectors of a symmetric 2×2 matrix as orthogonal arrows, with ellipses showing the quadratic form.
+### Section 4: Visual Artifacts & Geometric Interpretation
+- TikZ diagram: A → P⁻¹AP = D transformation flow.
+- TikZ diagram showing orthogonal eigenvectors of a symmetric matrix forming an orthonormal basis.
 
 ### Section 5: Step-by-Step Algorithmic Solution / Workflow
-Boxed diagonalisation procedure:
-1. Find characteristic polynomial $\det(A-\lambda I)=0$
-2. Solve for all eigenvalues $\lambda_1,\ldots,\lambda_n$
-3. For each $\lambda_i$, find eigenvector(s) via $(A-\lambda_i I)\mathbf{v}=\mathbf{0}$
-4. Check: $n$ linearly independent eigenvectors exist?
-5. Form $P = [\mathbf{v}_1\,|\,\mathbf{v}_2\,|\,\cdots\,|\,\mathbf{v}_n]$
-6. Compute $D = P^{-1}AP$ and verify it is diagonal
-- Branch: if not diagonalisable, mention Jordan normal form briefly.
+- Full diagonalization procedure with decision tree: is A diagonalizable? → form P → compute D.
 
 ### Section 6: Fully Worked Step-by-Step Numerical Examples
-At least **THREE (3)** examples inside `infobox` environments (ideally one per atomic sub-topic):
-- **Example 1:** Diagonalise a 2×2 matrix with distinct eigenvalues.
-- **Example 2 (Non-diagonalisable):** A matrix with repeated eigenvalue and deficient eigenspace — show why it cannot be diagonalised.
-- **Example 3:** Orthogonally diagonalise a real symmetric 2×2 matrix; verify $Q^TQ=I$.
-- **Example 4 (Applied):** Use $A^k = PD^kP^{-1}$ to compute $A^{10}$ for a given matrix. Interpret in context.
+- **Example 1:** Diagonalize a 2×2 matrix; verify D = P⁻¹AP.
+- **Example 2:** Show a defective 2×2 matrix (repeated eigenvalue, geo < alg) is NOT diagonalizable.
+- **Example 3 (Engineering):** Orthogonally diagonalize a 3×3 symmetric matrix; compute A⁴ via Aⁿ = PDⁿP⁻¹.
 
 ### Section 7: Tabular Comparison / Workflow Reference
-- Table: Diagonalisable vs Non-diagonalisable matrices — conditions, modal matrix existence, Jordan form alternative.
-- Table: Matrix functions via diagonalisation ($A^k$, $e^A$, $\sin(A)$) with formulas.
+- Table: diagonalization vs orthogonal diagonalization — conditions, matrix P, result, engineering application.
 
 ### Section 8: Common Student Mistakes & Pitfalls
-`mistakebox` with **Mistake | Why Students Do It | Correct Approach** columns. At least one row per atomic sub-topic:
-- Sub-topic 1: claiming matrices with same eigenvalues are similar (necessary but not sufficient in general)
-- Sub-topic 2: assuming every matrix is diagonalisable
-- Sub-topic 3: column order in $P$ must match order of $\lambda$ in $D$
-- Sub-topic 4: computing $A^k$ by brute force instead of using $D^k$
-- Sub-topic 5: failing to orthonormalise eigenvectors for repeated eigenvalues of symmetric matrix
+- `mistakebox` with `tabular`: at least one row per atomic sub-topic.
 
 ### Section 9: Comprehensive Assessment Suite
-1. **Viva-Voce (6–8, at least one per atomic sub-topic)**
-2. **Descriptive Problems (4–5)**
-3. **MCQs (5 or more, at least one per atomic sub-topic):** Bold correct answer, single-line explanation.
+1. **Viva-Voce Questions (8–10):** At least one per sub-topic.
+2. **Descriptive Exam Questions (4–5):** Full problems with answer hints.
+3. **MCQs (6+):** 4 options each, bold correct answer, one-line explanation, ≥1 per sub-topic.
 
 ### Section 10: Quick Recap & Formula Sheet
-- `learnbox` with 6–8 bullets.
+- `learnbox` with 6–8 bullet points: similarity transformation, diagonalizability condition, Aⁿ = PDⁿP⁻¹, orthogonal diagonalization conditions.
 
 ---
 
 ## 3. STRICT QUALITY & COMPILATION SAFEGUARDS
-- [ ] `\begin{document}` and `\end{document}` wrap entire code.
-- [ ] Section 3 contains **exactly 5 named `\subsection{}` entries**.
-- [ ] All `tcolorbox` environments properly closed.
-- [ ] Matrix notation uses `\begin{pmatrix}...\end{pmatrix}` consistently.
-- [ ] Section 9 has at least one viva and one MCQ per atomic sub-topic.
+
+- [ ] `\begin{document}` and `\end{document}` wrap entire content.
+- [ ] Section 3 contains **exactly 5 `\subsection{}` entries**.
+- [ ] No missing brackets, undefined control sequences, or unescaped special characters.
+- [ ] Every custom box is properly opened and closed.
+- [ ] All TikZ/pgfplots visuals are self-contained and compilable with `pdflatex`.
+- [ ] Matrix notation uses `\begin{pmatrix}...\end{pmatrix}`.
+- [ ] Assessment section has at least **5 viva questions and 5 MCQs (≥1 per sub-topic)**.
