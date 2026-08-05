@@ -48,7 +48,7 @@ This prompt covers **4 atomic sub-topics**. Each MUST appear as a separate named
 \pagestyle{fancy}
 \fancyhf{}
 \lhead{Determinants \& Rank}
-\rhead{Unit 1 — Matrix Algebra}
+\rhead{Unit 1 — LAC}
 \cfoot{\thepage}
 
 \title{\textbf{Determinants, Rank of a Matrix, Echelon Form and Normal Form} \\ \large Unit 1 — Matrix Algebra and Linear Systems}
