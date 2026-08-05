@@ -62,7 +62,7 @@ No atomic sub-topic may be merged into another or only mentioned in passing.
 \pagestyle{fancy}
 \fancyhf{}
 \lhead{Series Expansions}
-\rhead{Unit 3 — Single Variable Calculus}
+\rhead{Unit 3 -- LAC}
 \cfoot{\thepage}
 
 % Document Title Setup
