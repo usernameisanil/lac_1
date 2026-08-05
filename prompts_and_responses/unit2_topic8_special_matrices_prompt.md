@@ -1,4 +1,4 @@
-# Generated Prompt — Topic: Special Matrices (Orthogonal, Hermitian, Skew-Hermitian, Unitary)
+# Generated Prompt — Topic: Special Matrices
 
 **Unit:** Unit 2 — Eigenvalues, Eigenvectors, Diagonalization and Quadratic Forms  
 **Course:** Linear Algebra and Calculus (B.Tech 1st Year)  
@@ -8,15 +8,39 @@
 
 ## PROMPT INSTRUCTIONS
 
-You are an expert engineering mathematics professor writing a **complete, 100% compilable LaTeX (.tex) lecture note** on the topic **"Special Matrices: Orthogonal, Hermitian, Skew-Hermitian, and Unitary Matrices"**.
+You are an expert engineering mathematics professor writing a **complete, 100% compilable LaTeX (.tex) lecture note** on the topic **"Special Matrices"**.
 
 Write as an enthusiastic, patient teacher who builds deep intuition, connects abstract concepts to real-world engineering applications, and ensures students never feel overwhelmed by mathematical notation.
 
 ---
 
-## 1. LATEX PREAMBLE & CONFIGURATION REQUIREMENTS
+## 0. SUB-TOPIC COVERAGE MANDATE (STRICT ENFORCEMENT)
 
-The generated LaTeX document MUST start with this exact preamble and environment definitions:
+This prompt covers a set of **atomic sub-topics** from the syllabus for the group topic **"Special Matrices"**.
+
+The generated LaTeX document MUST treat **EACH atomic sub-topic** as a **separate, named subsection** with:
+- A dedicated `infobox` containing formal definitions/properties/algorithms for that sub-topic.
+- At least **one fully worked numerical/symbolic example** explicitly targeting that sub-topic.
+- At least **one assessment item** (viva question or MCQ) explicitly tied to that sub-topic.
+
+No atomic sub-topic may be merged into another or only mentioned in passing.
+
+| # | Atomic Sub-Topic | Mandatory Coverage Requirements |
+|---|------------------|---------------------------------|
+| 1 | Symmetric and Skew-Symmetric Matrices | `infobox`: symmetric $A=A^T$, skew-symmetric $A=-A^T$; eigenvalues of symmetric matrix are real; eigenvalues of skew-symmetric are zero or purely imaginary; every square matrix is uniquely the sum of a symmetric and skew-symmetric part. Worked example: decompose a 3×3 matrix into symmetric and skew-symmetric parts. MCQ on eigenvalues of a real skew-symmetric matrix. |
+| 2 | Orthogonal Matrices | `infobox`: $Q^TQ=I$ iff columns are orthonormal; $\det(Q)=\pm1$; eigenvalues have modulus 1; preserves length and angle (isometry); inverse = transpose. Worked example: verify a given 2×2 rotation matrix is orthogonal, find its eigenvalues. Viva: what does it mean geometrically that $Q$ is orthogonal? |
+| 3 | Hermitian and Skew-Hermitian Matrices | `infobox`: Hermitian $A=A^*$ (conjugate transpose); skew-Hermitian $A=-A^*$; Hermitian matrices have real eigenvalues; skew-Hermitian have purely imaginary or zero eigenvalues; unitary matrix $U^*U=I$ (complex orthogonal). Worked example: verify a complex matrix is Hermitian; find its eigenvalues. MCQ on eigenvalues of a Hermitian matrix. |
+| 4 | Idempotent and Nilpotent Matrices | `infobox`: idempotent $A^2=A$, eigenvalues $\in\{0,1\}$, rank = trace; nilpotent $A^k=0$ for some $k$, all eigenvalues = 0, characteristic polynomial = $\lambda^n$. Worked example: verify idempotency and find eigenvalues; show a nilpotent matrix satisfies $A^2=0$. Viva: what is the characteristic polynomial of a nilpotent matrix? |
+| 5 | Unitary Matrices and Normal Matrices | `infobox`: unitary $U^*U=I$ (generalises orthogonal to complex); normal matrix $AA^*=A^*A$ (includes Hermitian, skew-Hermitian, unitary, real symmetric, orthogonal); normal matrices are unitarily diagonalisable (Spectral Theorem for normal matrices). Worked example: verify a complex matrix is unitary. MCQ on the condition for unitary diagonalisability. |
+
+**ENFORCEMENT RULES:**
+1. Section 3 must contain **exactly 5 named `\subsection{}` entries**, one per row above.
+2. Section 9 must contain **at least one viva-voce question and one MCQ per atomic sub-topic** (minimum 5 viva, 5 MCQ).
+3. Each atomic sub-topic must have a dedicated `infobox`, at least one fully worked example, and at least one assessment item.
+
+---
+
+## 1. LATEX PREAMBLE & CONFIGURATION REQUIREMENTS
 
 ```latex
 \documentclass[12pt,a4paper]{article}
@@ -27,21 +51,18 @@ The generated LaTeX document MUST start with this exact preamble and environment
 \pgfplotsset{compat=1.18}
 \tcbuselibrary{skins, breakable}
 
-% Define custom environments
 \newtcolorbox{curiositybox}[1][]{colback=yellow!10, colframe=orange!80, title=#1, breakable}
 \newtcolorbox{infobox}[1][]{colback=blue!5, colframe=blue!60, title=#1, breakable}
 \newtcolorbox{mistakebox}[1][]{colback=red!5, colframe=red!60, title=#1, breakable}
 \newtcolorbox{learnbox}[1][]{colback=green!5, colframe=green!60, title=#1, breakable}
 
-% Header and Footer
 \pagestyle{fancy}
 \fancyhf{}
 \lhead{Special Matrices}
-\rhead{Unit 2 — Special Matrices}
+\rhead{Unit 2 — Eigenanalysis}
 \cfoot{\thepage}
 
-% Document Title Setup
-\title{\textbf{Special Matrices: Orthogonal, Hermitian, Skew-Hermitian, and Unitary} \\ \large Unit 2: Eigenvalues, Eigenvectors, Diagonalization and Quadratic Forms}
+\title{\textbf{Special Matrices} \\ \large Unit 2: Eigenvalues, Eigenvectors, Diagonalization and Quadratic Forms}
 \author{Department of Mathematics}
 \date{\today}
 ```
@@ -50,92 +71,70 @@ The generated LaTeX document MUST start with this exact preamble and environment
 
 ## 2. MANDATORY DOCUMENT SECTIONS & ARCHITECTURE
 
-Generate a document containing ALL of the following sections in strict logical sequence:
-
 ### Section 1: Real-World Engineering Hook (Curiosity Box)
 - `curiositybox` titled **"Why Should an Engineer Care?"**
-- Scenario: **Quantum computing and signal processing** — quantum gates are represented by unitary matrices (preserve probability norms). Rotation of 3D coordinates in robotics and computer graphics uses orthogonal matrices (preserve distances). Hermitian matrices represent observable physical quantities in quantum mechanics (guaranteed real eigenvalues = measurable values). These are not abstract — they are the mathematical DNA of modern technology.
+- Scenario: **Quantum computing and signal processing** — unitary matrices represent quantum gates that preserve probability; Hermitian matrices represent observable quantities; orthogonal matrices are used in 3D rotation (robotics, computer graphics); idempotent matrices appear in projection operations (filtering, regression).
 
 ### Section 2: Why This Topic Exists (Theory vs Real-World Impact)
-- `booktabs` table: each special matrix type vs. engineering/physics application:
-  - Orthogonal: 3D rotation, coordinate transforms, PCA, orthogonal diagonalisation
-  - Hermitian: quantum observables, covariance matrices, real eigenvalues guaranteed
-  - Skew-Hermitian: angular momentum operators, anti-symmetric systems
-  - Unitary: quantum gates, DFT (Discrete Fourier Transform) matrix, signal processing
-- Conclude with `learnbox`.
+- 2-column `booktabs` table with at least one row per atomic sub-topic.
+- Conclude with a `learnbox`.
 
-### Section 3: Intuition First & Mathematical Definitions
-- Intuition: "Special" matrices preserve geometric structure — orthogonal preserves lengths and angles in real space; unitary preserves this in complex space. Hermitian is the complex generalisation of a symmetric matrix.
-- `infobox` with complete definitions:
-  - **Conjugate transpose** (Hermitian conjugate): $A^H = (\bar{A})^T = \overline{A^T}$
-  - **Orthogonal matrix**: $A^T A = I \Leftrightarrow A^{-1} = A^T$; all entries real; $\det(A) = \pm 1$; eigenvalues have $|\lambda| = 1$
-  - **Hermitian matrix**: $A^H = A$ (i.e., $a_{ij} = \overline{a_{ji}}$); diagonal entries are always real; eigenvalues are always real; eigenvectors for distinct eigenvalues are orthogonal
-  - **Skew-Hermitian matrix**: $A^H = -A$; diagonal entries are purely imaginary or zero; eigenvalues are purely imaginary or zero
-  - **Unitary matrix**: $A^H A = I \Leftrightarrow A^{-1} = A^H$; columns are orthonormal in $\mathbb{C}^n$; $|\det(A)| = 1$; eigenvalues have $|\lambda| = 1$
-  - Relationship: real symmetric $\subset$ Hermitian; real orthogonal $\subset$ Unitary
+### Section 3: Intuition First & Mathematical Definitions (Subsections per Sub-Topic)
+
+Create **exactly 5 named `\subsection{}` entries**, one per atomic sub-topic:
+
+1. `\subsection{Symmetric and Skew-Symmetric Matrices}`
+2. `\subsection{Orthogonal Matrices}`
+3. `\subsection{Hermitian and Skew-Hermitian Matrices}`
+4. `\subsection{Idempotent and Nilpotent Matrices}`
+5. `\subsection{Unitary Matrices and Normal Matrices}`
+
+Each with 2–4 lines of intuition followed by a dedicated `infobox` per Section 0 specifications.
 
 ### Section 4: Visual Artifacts & Geometric Interpretation (MANDATORY LaTeX Visuals)
-- **Visual 1 (TikZ Venn diagram):** Nested/overlapping sets showing the relationships: Real Symmetric ⊂ Hermitian; Real Orthogonal ⊂ Unitary; Normal matrices containing both; label each region with an example.
-- **Visual 2 (TikZ):** Geometric diagram showing an orthogonal transformation $Q$ applied to a unit circle: the image is still a unit circle (distances preserved), with two orthonormal basis vectors shown before and after transformation.
-- **Visual 3 (TikZ):** Diagram for unitary transformation acting on the complex unit circle $|z|=1$, showing eigenvalues on the unit circle.
+- **Visual 1 (TikZ):** Venn diagram or hierarchy of matrix types — Normal $\supset$ \{Hermitian, Unitary, Orthogonal, Symmetric\} showing containment relationships.
+- **Visual 2 (TikZ):** 2D geometric illustration of an orthogonal matrix as a rotation, showing a unit circle preserved under the transformation.
 
 ### Section 5: Step-by-Step Algorithmic Solution / Workflow
-Boxed workflow for EACH matrix type — Verification Algorithm:
-
-**Checking Orthogonality:**
-1. Compute $A^T$
-2. Verify $A^T A = I$ (or equivalently, columns are orthonormal)
-3. Compute $\det(A)$ — should be $\pm 1$
-
-**Checking Hermitian:**
-1. Compute $A^H$ (conjugate transpose — conjugate each element, then transpose)
-2. Verify $A^H = A$ element-by-element
-3. Optional: verify all eigenvalues are real
-
-**Checking Skew-Hermitian:**
-1. Compute $A^H$
-2. Verify $A^H = -A$ element-by-element
-3. Note: $iA$ is Hermitian if $A$ is skew-Hermitian
-
-**Checking Unitary:**
-1. Compute $A^H$
-2. Verify $A^H A = I$
-3. Compute $|\det(A)|$ — should be 1
+Boxed workflow for identifying and verifying special matrix types:
+1. Check symmetry: compute $A^T$ (or $A^*$ for complex); compare with $A$
+2. Check orthogonality/unitarity: compute $Q^TQ$ (or $U^*U$); verify = $I$
+3. Check idempotency/nilpotency: compute $A^2$; compare with $A$ or $0$
+4. Check normality: compute $AA^*$ and $A^*A$; verify equality
+5. For each type confirmed, state eigenvalue consequences immediately
 
 ### Section 6: Fully Worked Step-by-Step Numerical Examples
-Provide **THREE** comprehensive examples:
-
-- **Example 1 (Orthogonal Matrix — 2×2 Rotation):** $A = \begin{pmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{pmatrix}$. Verify $A^T A = I$ symbolically. Compute $\det(A) = 1$. Find eigenvalues $e^{\pm i\theta}$ (complex on unit circle). Show it represents a rotation by $\theta$. End with `learnbox`.
-
-- **Example 2 (Hermitian Matrix — Complex):** $A = \begin{pmatrix} 2 & 1+i \\ 1-i & 3 \end{pmatrix}$. Verify $A^H = A$ (element-by-element). Compute eigenvalues (must be real — verify). Find eigenvectors and show they are orthogonal (in $\mathbb{C}^2$ inner product). End with `learnbox`.
-
-- **Example 3 (Unitary Matrix — DFT Application):** The 2×2 DFT matrix is $F = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix}$ (Hadamard gate in quantum computing). Verify $F^H F = I$. Compute $|\det(F)|$. Interpret: applying $F$ twice gives identity (up to scale). End with `learnbox`.
+At least **THREE (3)** examples inside `infobox` environments (ideally one per atomic sub-topic):
+- **Example 1:** Decompose a 3×3 matrix into symmetric and skew-symmetric parts; find eigenvalues of each part.
+- **Example 2:** Verify a 2×2 rotation matrix is orthogonal; find its eigenvalues (complex).
+- **Example 3:** Verify a complex matrix is Hermitian; confirm real eigenvalues.
+- **Example 4:** Show $A^2=0$ for a nilpotent matrix; find its characteristic polynomial.
+- **Example 5 (Applied — Projection):** Show that an idempotent matrix represents a projection; interpret geometrically.
 
 ### Section 7: Tabular Comparison / Workflow Reference
-- **Master comparison table:** Property | Orthogonal | Hermitian | Skew-Hermitian | Unitary — rows covering: defining condition, inverse, determinant, eigenvalue property, real/complex entries, example application, relationship to other types.
+- Master reference table: all 5 matrix types with defining condition, eigenvalue property, determinant property, engineering application, and relationship to diagonalisation.
 
 ### Section 8: Common Student Mistakes & Pitfalls
-`mistakebox` table:
-- Computing transpose instead of conjugate transpose for complex matrices
-- Assuming all real symmetric matrices are orthogonal (they are Hermitian, not necessarily orthogonal)
-- Forgetting that skew-Hermitian diagonal entries must be purely imaginary (not just any complex number)
-- Confusing unitary ($A^H A = I$) with Hermitian ($A^H = A$)
-- Claiming eigenvalues of unitary matrix are $\pm 1$ (they are on unit circle $|\lambda|=1$, not necessarily real)
+`mistakebox` with **Mistake | Why Students Do It | Correct Approach** columns. At least one row per atomic sub-topic:
+- Sub-topic 1: confusing $A^T = A$ with $A^T = -A$
+- Sub-topic 2: assuming $Q^T = Q^{-1}$ without verifying $Q^TQ=I$
+- Sub-topic 3: applying real transpose instead of conjugate transpose for Hermitian check
+- Sub-topic 4: confusing idempotent ($A^2=A$) with involutory ($A^2=I$)
+- Sub-topic 5: assuming all matrices are normal
 
 ### Section 9: Comprehensive Assessment Suite
-1. **Viva-Voce (6–8):** What is a conjugate transpose? How does a Hermitian matrix differ from a symmetric matrix? Are eigenvalues of a skew-Hermitian matrix real? What is the geometric action of a unitary matrix?
-2. **Descriptive Problems (4–5):** Verify each type, find eigenvalues for Hermitian example, construct a 2×2 unitary matrix.
-3. **MCQs (5):** Bold correct answer, single-line explanation. Topics: eigenvalues of orthogonal matrix, defining property of unitary, determinant of orthogonal.
+1. **Viva-Voce (6–8, at least one per atomic sub-topic)**
+2. **Descriptive Problems (4–5)**
+3. **MCQs (5 or more, at least one per atomic sub-topic):** Bold correct answer, single-line explanation.
 
 ### Section 10: Quick Recap & Formula Sheet
-`learnbox` with 6–8 bullets: definitions of all four types, key eigenvalue properties, inverse formulas ($A^T$, $A^H$), determinant constraints, relationships between types, engineering applications.
+- `learnbox` with 6–8 bullets.
 
 ---
 
 ## 3. STRICT QUALITY & COMPILATION SAFEGUARDS
 - [ ] `\begin{document}` and `\end{document}` wrap entire code.
-- [ ] Complex conjugate notation: use `\overline{z}` for conjugate, `A^H` for conjugate transpose — define `\newcommand{\conj}[1]{\overline{#1}}` if needed.
-- [ ] TikZ Venn diagram uses proper circle/ellipse `\draw` commands.
-- [ ] All `tcolorbox` environments properly closed.
-- [ ] Matrix entries with $i$ use `i` not `\imath` for consistency.
-- [ ] Rotation matrix example uses `\cos`, `\sin` commands (not plain text).
+- [ ] Section 3 contains **exactly 5 named `\subsection{}` entries**.
+- [ ] All TikZ/pgfplots visuals self-contained and compilable with pdflatex.
+- [ ] Matrix notation uses `\begin{pmatrix}...\end{pmatrix}` consistently.
+- [ ] Section 9 has at least one viva and one MCQ per atomic sub-topic.
