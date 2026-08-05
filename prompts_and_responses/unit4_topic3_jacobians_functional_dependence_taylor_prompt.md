@@ -62,7 +62,7 @@ The generated LaTeX document MUST start with this exact preamble:
 \pagestyle{fancy}
 \fancyhf{}
 \lhead{Jacobians, Functional Dependence, Taylor Expansion}
-\rhead{Unit 4 -- Multivariable Differentiation}
+\rhead{Unit 4 -- LAC}
 \cfoot{\thepage}
 
 % Document Title Setup

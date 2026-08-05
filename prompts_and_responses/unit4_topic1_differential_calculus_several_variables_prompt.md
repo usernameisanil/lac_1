@@ -63,7 +63,7 @@ The generated LaTeX document MUST start with this exact preamble:
 \pagestyle{fancy}
 \fancyhf{}
 \lhead{Differential Calculus of Several Variables}
-\rhead{Unit 4 -- Multivariable Differentiation}
+\rhead{Unit 4 -- LAC}
 \cfoot{\thepage}
 
 % Document Title Setup

@@ -63,7 +63,7 @@ The generated LaTeX document MUST start with this exact preamble:
 \pagestyle{fancy}
 \fancyhf{}
 \lhead{Optimization: Maxima, Minima, Lagrange Multipliers}
-\rhead{Unit 4 -- Multivariable Differentiation}
+\rhead{Unit 4 -- LAC}
 \cfoot{\thepage}
 
 % Document Title Setup
